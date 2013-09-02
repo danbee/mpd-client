@@ -1,8 +1,11 @@
-require 'sinatra'
-require "sinatra/namespace"
+require 'bundler'
+ENV['RACK_ENV'] ||= 'development'
+Bundler.require(:default, ENV['RACK_ENV'])
+
 require 'json'
-require 'ruby-mpd'
 require 'cgi'
+
+require './models/album'
 
 class MPDClient < Sinatra::Base
   register Sinatra::Namespace
@@ -55,9 +58,7 @@ class MPDClient < Sinatra::Base
   end
 
   def mpd
-    @mpd ||= MPD.new
-    @mpd.connect unless @mpd.connected?
-    @mpd
+    MPDConnection.mpd
   end
 
 end

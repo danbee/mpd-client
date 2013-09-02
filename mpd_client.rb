@@ -14,7 +14,7 @@ class MPDClient < Sinatra::Base
     end
 
     get '/artists/:artist' do
-      JSON mpd.albums(CGI.unescape(params[:artist]))
+      JSON get_albums_by_artist(CGI.unescape(params[:artist]))
     end
 
     get '/albums/:album' do
@@ -33,11 +33,25 @@ class MPDClient < Sinatra::Base
 
   private
 
+  def get_albums_by_artist(artist)
+    mpd.albums(artist).map { |album| album_info(album) }.sort { |a, b| a[:year] <=> b[:year] }
+  end
+
   def get_songs_by_album(album)
-    mpd.search(:album, album).map do |song|
-      { tracknumber: song.track,
-        title: song.title }
-    end
+    mpd.search(:album, album).map { |song| song_info(song) }
+  end
+
+  def song_info(song)
+    { disc: song.disc,
+      track: song.track,
+      title: song.title }
+  end
+
+  def album_info(album)
+    first_song = mpd.search(:album, album).first
+    { title: first_song.album,
+      genre: first_song.genre,
+      year: first_song.date }
   end
 
   def mpd

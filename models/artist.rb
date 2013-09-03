@@ -7,10 +7,6 @@ class Artist
     @name = name
   end
 
-  def <=>(artist)
-    name <=> artist.name
-  end
-
   def self.all
     MPDConnection.mpd.artists.sort.map { |artist| Artist.new(artist) }
   end

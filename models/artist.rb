@@ -1,17 +1,7 @@
 require './models/mpd_connection'
 
-class Artist
-  attr_accessor :name
-
-  def initialize(name)
-    @name = name
-  end
-
+class Artist < Struct.new(:name)
   def self.all
-    MPDConnection.mpd.artists.sort.map { |artist| Artist.new(artist) }
-  end
-
-  def attributes
-    { name: @name }
+    MPDConnection.mpd.artists.sort.map { |artist| self.new(artist) }
   end
 end

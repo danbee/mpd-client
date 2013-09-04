@@ -14,11 +14,11 @@ class MPDClient < Sinatra::Base
   namespace '/api' do
 
     get '/albums' do
-      JSON Album.all.map(&:attributes)
+      JSON Album.all.map(&:to_h)
     end
 
     get '/artists/:artist' do
-      JSON Album.by_artist(CGI.unescape(params[:artist])).sort.map(&:attributes)
+      JSON Album.by_artist(CGI.unescape(params[:artist])).sort.map(&:to_h)
     end
 
     #get '/albums/:album' do
@@ -30,7 +30,7 @@ class MPDClient < Sinatra::Base
     #end
 
     get '/artists' do
-      JSON Artist.all.map(&:attributes)
+      JSON Artist.all.map(&:to_h)
     end
 
   end

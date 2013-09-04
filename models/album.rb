@@ -1,13 +1,12 @@
 require './models/mpd_connection'
 
-class Album
-  attr_accessor :title, :genre, :year
+class Album < Struct.new(:title, :genre, :year)
 
   def initialize(album)
     first_song = MPDConnection.mpd.search(:album, album).first
-    @title = first_song.album
-    @genre = first_song.genre
-    @year  = first_song.date
+    self.title = first_song.album
+    self.genre = first_song.genre
+    self.year  = first_song.date
   end
 
   def <=>(album)
@@ -15,16 +14,10 @@ class Album
   end
 
   def self.all
-    MPDConnection.mpd.albums.sort.map { |artist| Album.new(album) }
+    MPDConnection.mpd.albums.sort.map { |artist| self.new(album) }
   end
 
   def self.by_artist(artist)
-    MPDConnection.mpd.albums(artist).map { |album| Album.new(album) }
-  end
-
-  def attributes
-    { title: @title,
-      genre: @genre,
-      year: @year }
+    MPDConnection.mpd.albums(artist).map { |album| self.new(album) }
   end
 end

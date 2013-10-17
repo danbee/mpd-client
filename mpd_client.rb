@@ -13,6 +13,10 @@ require './models/song'
 class MPDClient < Sinatra::Base
   register Sinatra::Namespace
 
+  get '/' do
+    erb :index
+  end
+
   namespace '/api' do
 
     get '/albums' do

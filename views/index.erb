@@ -6,9 +6,20 @@
 
   <body>
 
-    <script src="js/libs/jquery-1.10.2.min.js"></script>
-    <script src="js/libs/handlebars-1.0.0.js"></script>
-    <script src="js/libs/ember.js"></script>
-    <script src="js/libs/ember-data.js"></script>
+    <script type="text/x-handlebars" data-template-name="application">
+      <h1>MPD Client</h1>
+      {{ outlet }}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="queue">
+      <h2>Queue</h2>
+      <ul>
+      {{#each song in controller}}
+        <li>{{ song.artist }} - {{ song.title }}</li>
+      {{/each}}
+      </ul>
+    </script>
+
+    <%= javascript_tag 'mpd-client' %>
   </body>
 </html>

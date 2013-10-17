@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-asset-pipeline'
 gem 'foreman'
 
 gem 'ruby-mpd'

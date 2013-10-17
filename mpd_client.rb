@@ -2,6 +2,8 @@ require 'bundler'
 ENV['RACK_ENV'] ||= 'development'
 Bundler.require(:default, ENV['RACK_ENV'])
 
+require 'sinatra/asset_pipeline'
+
 require 'json'
 require 'cgi'
 
@@ -11,6 +13,11 @@ require './models/artist'
 require './models/song'
 
 class MPDClient < Sinatra::Base
+
+  set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+  set :assets_prefix, 'assets'
+  register Sinatra::AssetPipeline
+
   register Sinatra::Namespace
 
   get '/' do

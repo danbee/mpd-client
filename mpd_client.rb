@@ -5,6 +5,7 @@ Bundler.require(:default, ENV['RACK_ENV'])
 require 'json'
 require 'cgi'
 
+require './models/control'
 require './models/album'
 require './models/artist'
 require './models/song'

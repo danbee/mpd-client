@@ -1,10 +1,11 @@
 require './models/mpd_connection'
 
-class Album < Struct.new(:title, :genre, :year)
+class Album < Struct.new(:title, :artist, :genre, :year)
 
   def initialize(album)
     first_song = MPDConnection.mpd.search(:album, album).first
     self.title = first_song.album
+    self.artist = first_song.artist
     self.genre = first_song.genre
     self.year  = first_song.date
   end

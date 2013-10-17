@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>MPD Client</title>
+    <style>
+      #queue .current {
+        font-weight: bold;
+      }
+    </style>
   </head>
 
   <body>
@@ -9,15 +14,26 @@
     <script type="text/x-handlebars" data-template-name="application">
       <h1>MPD Client</h1>
       {{ outlet }}
+      {{ render "controls" }}
     </script>
 
     <script type="text/x-handlebars" data-template-name="queue">
       <h2>Queue</h2>
-      <ul>
-      {{#each song in controller}}
-        <li>{{ song.artist }} - {{ song.title }}</li>
+      <ul id="queue">
+      {{#each controller}}
+        <li {{bindAttr class="current"}}>{{ artist }} - {{ title }}</li>
       {{/each}}
       </ul>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="controls">
+      <div id="controls">
+        <button {{ action "previous" }}>Previous</button>
+        <button {{ action "play" }}>Play</button>
+        <button {{ action "pause" }}>Pause</button>
+        <button {{ action "stop" }}>Stop</button>
+        <button {{ action "next" }}>Next</button>
+      </div>
     </script>
 
     <%= javascript_tag 'mpd-client' %>

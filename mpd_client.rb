@@ -7,6 +7,7 @@ require 'cgi'
 
 require './models/album'
 require './models/artist'
+require './models/song'
 
 class MPDClient < Sinatra::Base
   register Sinatra::Namespace
@@ -31,6 +32,10 @@ class MPDClient < Sinatra::Base
 
     get '/artists' do
       JSON Artist.all.map(&:to_h)
+    end
+
+    get '/queue' do
+      JSON Song.queue.map(&:to_h)
     end
 
   end

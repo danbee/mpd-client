@@ -17,7 +17,9 @@
       <h2>Queue</h2>
       <ul id="queue">
       {{#each controller}}
-        <li {{bindAttr class="current"}}>{{ artist }} - {{ title }}</li>
+        <li {{bindAttr class="playing"}}>{{ artist }} - {{ title }}</li>
+      {{else}}
+        <li>Play queue empty</li>
       {{/each}}
       </ul>
     </script>

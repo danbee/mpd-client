@@ -6,12 +6,14 @@ App.QueueRoute = Ember.Route.extend({
   }
 });
 
-App.ControlsController = Ember.Controller.extend({
+App.QueueController = Ember.ArrayController.extend();
+
+App.TransportController = Ember.Controller.extend({
   actions: {
-    previous: function() { return Ember.$.ajax('/api/control/previous', { type: 'PUT' }); },
-    play:     function() { return Ember.$.ajax('/api/control/play', { type: 'PUT' }); },
-    pause:    function() { return Ember.$.ajax('/api/control/pause', { type: 'PUT' }); },
-    stop:     function() { return Ember.$.ajax('/api/control/stop', { type: 'PUT' }); },
-    next:     function() { return Ember.$.ajax('/api/control/next', { type: 'PUT' }); }
+    sendControl: function(control) {
+      Ember.$.ajax('/api/control/' + control, { type: 'PUT' });
+    }
   }
 });
+
+App.Song = DS.Model.extend();

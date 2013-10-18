@@ -10,7 +10,7 @@
     <script type="text/x-handlebars" data-template-name="application">
       <h1>MPD Client</h1>
       {{ outlet }}
-      {{ render "controls" }}
+      {{ render "transport" }}
     </script>
 
     <script type="text/x-handlebars" data-template-name="queue">
@@ -24,13 +24,13 @@
       </ul>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="controls">
+    <script type="text/x-handlebars" data-template-name="transport">
       <div id="controls">
-        <button {{ action "previous" }}>Previous</button>
-        <button {{ action "play" }}>Play</button>
-        <button {{ action "pause" }}>Pause</button>
-        <button {{ action "stop" }}>Stop</button>
-        <button {{ action "next" }}>Next</button>
+        <button {{ action "sendControl" "previous" }}>previous</button>
+        <button {{ action "sendControl" "play"     }}>play</button>
+        <button {{ action "sendControl" "pause"    }}>pause</button>
+        <button {{ action "sendControl" "stop"     }}>stop</button>
+        <button {{ action "sendControl" "next"     }}>next</button>
       </div>
     </script>
 

@@ -3,8 +3,7 @@ require './models/mpd_connection'
 class Song < Struct.new(:id, :artist, :album, :title, :playing)
 
   def initialize(song, playing: false)
-    @song = song
-    self.id = song.songid
+    self.id = song.id
     self.artist = song.artist
     self.album = song.album
     self.title  = song.title

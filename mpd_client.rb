@@ -47,7 +47,7 @@ class MPDClient < Sinatra::Base
     end
 
     get '/queue' do
-      JSON Song.queue.map(&:to_h)
+      JSON({ data: Song.queue.map(&:to_h) })
     end
 
     put '/control/:action' do

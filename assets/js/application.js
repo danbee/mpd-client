@@ -1,19 +1,17 @@
-var App = Ember.Application.create();
+var QueueSong = can.Model({
+  findAll: 'GET /api/queue'
+}, {});
 
-App.QueueRoute = Ember.Route.extend({
-  model: function() {
-    return Ember.$.getJSON('/api/queue');
-  }
+QueueSong.findAll({}, function(songs) {
+  $('#queue').html(can.view('queueTemplate',
+                            { songs: songs }));
+}, function(xhr) {
+
 });
 
-App.QueueController = Ember.ArrayController.extend();
+$(document).ready(function() {
+  $('#transport').html(can.view('transportTemplate'));
 
-App.TransportController = Ember.Controller.extend({
-  actions: {
-    sendControl: function(control) {
-      Ember.$.ajax('/api/control/' + control, { type: 'PUT' });
-    }
-  }
+  $('#controls button').on('click', function(e) {
+  });
 });
-
-App.Song = DS.Model.extend();

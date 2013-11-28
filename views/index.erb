@@ -7,30 +7,30 @@
 
   <body>
 
-    <script type="text/x-handlebars" data-template-name="application">
-      <h1>MPD Client</h1>
-      {{ outlet }}
-      {{ render "transport" }}
-    </script>
+    <h1>MPD Client</h1>
 
-    <script type="text/x-handlebars" data-template-name="queue">
+    <div id="queue"></div>
+
+    <div id="transport"></div>
+
+    <script type="text/mustache" id="queueTemplate">
       <h2>Queue</h2>
       <ul id="queue">
-      {{#each controller}}
-        <li {{bindAttr class="playing"}}>{{ artist }} - {{ title }}</li>
-      {{else}}
+      {{#songs}}
+        <li{{#playing}} class="playing"{{/playing}}>{{ artist }} - {{ title }}</li>
+      {{/songs}} {{^songs}}
         <li>Play queue empty</li>
-      {{/each}}
+      {{/songs}}
       </ul>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="transport">
+    <script type="text/mustache-handlebars" id="transportTemplate">
       <div id="controls">
-        <button {{ action "sendControl" "previous" }}>previous</button>
-        <button {{ action "sendControl" "play"     }}>play</button>
-        <button {{ action "sendControl" "pause"    }}>pause</button>
-        <button {{ action "sendControl" "stop"     }}>stop</button>
-        <button {{ action "sendControl" "next"     }}>next</button>
+        <button>previous</button>
+        <button>play</button>
+        <button>pause</button>
+        <button>stop</button>
+        <button>next</button>
       </div>
     </script>
 

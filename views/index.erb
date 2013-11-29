@@ -17,7 +17,7 @@
       <h2>Queue</h2>
       <ul id="queue">
       {{#songs}}
-        <li{{#playing}} class="playing"{{/playing}}>{{ artist }} - {{ title }}</li>
+      <li id="{{ id }}"{{#playing}} class="playing"{{/playing}}>{{ artist }} - {{ title }}</li>
       {{/songs}} {{^songs}}
         <li>Play queue empty</li>
       {{/songs}}

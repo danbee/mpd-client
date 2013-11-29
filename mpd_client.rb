@@ -7,6 +7,7 @@ require 'sinatra/asset_pipeline'
 require 'json'
 require 'cgi'
 
+require './models/mpd_connection'
 require './models/control'
 require './models/album'
 require './models/artist'
@@ -25,6 +26,10 @@ class MPDClient < Sinatra::Base
   end
 
   namespace '/api' do
+
+    get '/status' do
+      JSON MPDConnection.status
+    end
 
     get '/albums' do
       JSON Album.all.map(&:to_h)
@@ -53,6 +58,7 @@ class MPDClient < Sinatra::Base
     put '/control/:action' do
       if Control.controls.include?(params[:action].to_sym)
         Control.send(params[:action])
+        JSON MPDConnection.status
       else
         not_found
       end

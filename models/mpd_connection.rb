@@ -4,4 +4,8 @@ class MPDConnection
     @@mpd.connect unless @@mpd.connected?
     @@mpd
   end
+
+  def self.status
+    self.mpd.status
+  end
 end

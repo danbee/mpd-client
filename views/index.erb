@@ -13,27 +13,6 @@
 
     <div id="transport"></div>
 
-    <script type="text/mustache" id="queueTemplate">
-      <h2>Queue</h2>
-      <ul id="queue">
-      {{#songs}}
-      <li id="{{ id }}"{{#playing}} class="playing"{{/playing}}>{{ artist }} - {{ title }}</li>
-      {{/songs}} {{^songs}}
-        <li>Play queue empty</li>
-      {{/songs}}
-      </ul>
-    </script>
-
-    <script type="text/mustache-handlebars" id="transportTemplate">
-      <div id="controls">
-        <button data-action="previous">previous</button>
-        <button data-action="play">play</button>
-        <button data-action="pause">pause</button>
-        <button data-action="stop">stop</button>
-        <button data-action="next">next</button>
-      </div>
-    </script>
-
     <%= javascript_tag 'mpd-client' %>
   </body>
 </html>

@@ -1,6 +1,8 @@
 //= require ./libs/jquery-1.10.2.min
-//= require ./libs/handlebars-1.0.0
 //= require ./libs/can.jquery.min.js
+//= require ./libs/can.ejs.js
 
-//= require ./application.js
+//= require_tree ./models/
+//= require_tree ./controls/
 //= require ./router.js
+//= require ./application.js

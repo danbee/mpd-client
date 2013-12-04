@@ -1,11 +1,19 @@
 var Transport = can.Control.extend({
 
-  init: function(element) {
+  init: function(element, options) {
+    this.status = options.status;
     element.html(can.view('views/transport.ejs'));
   },
 
   sendCommand: function(command) {
-    can.ajax({ url: '/api/control/'+command, type: 'PUT' });
+    var self = this;
+    can.ajax({
+      url: '/api/control/' + command,
+      type: 'PUT',
+      success: function(status) {
+        self.status.attr(status);
+      }
+    });
   },
 
   'button click': function(element, event) {

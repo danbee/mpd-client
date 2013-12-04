@@ -27,6 +27,10 @@ class MPDClient < Sinatra::Base
 
   namespace '/api' do
 
+    before do
+      content_type 'application/json'
+    end
+
     get '/status' do
       JSON MPDConnection.status
     end

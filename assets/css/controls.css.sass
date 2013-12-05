@@ -1,11 +1,17 @@
-#controls button
-  @extend .icon
-  font-size: 2em
-  width: 2em
-  padding: 0.5em
+#transport
+  position: fixed
+  bottom: 0
+  width: 20em
+  background: rgba(255, 255, 255, 0.9)
   text-align: center
-  border: none
-  border-radius: 0.25em
-  background: #ddd
-  &:hover
-    background: #aaa
+  button
+    @extend .icon
+    font-size: 2em
+    width: 23%
+    padding: 0.5em
+    text-align: center
+    border: none
+    background: none
+    color: black
+    &:hover, &:focus
+      text-shadow: 0 0 10px rgba(255, 255, 255, 1)

@@ -2,17 +2,17 @@
 <html>
   <head>
     <title>MPD Client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_tag 'mpd-client' %>
+    <%= javascript_tag 'mpd-client' %>
   </head>
 
   <body>
-
-    <h1>MPD Client</h1>
-
-    <div id="queue"></div>
-
-    <div id="transport"></div>
-
-    <%= javascript_tag 'mpd-client' %>
+    <div id="app">
+      <div id="content">
+        <div id="queue"></div>
+      </div>
+      <div id="transport"></div>
+    </div>
   </body>
 </html>

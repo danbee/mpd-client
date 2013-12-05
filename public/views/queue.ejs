@@ -1,8 +1,8 @@
-<h2>Queue</h2>
-<ul id="queue">
+<ol id="queue">
   <% list(queueSongs, function(song) { %>
     <li id="<%= song.attr('id') %>" <%= song.attr('playing') ? 'class="playing"' : '' %>>
-      <%= song.attr('artist') %> - <%= song.attr('title') %>
+      <p class="title"><%= song.attr('title') %></p>
+      <p class="artist"><%= song.attr('artist') %></p>
     </li>
   <% }) %>
-</ul>
+</ol>

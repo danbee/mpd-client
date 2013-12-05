@@ -1,2 +1,34 @@
-#queue .playing
-  font-weight: bold
+#queue
+  ol
+    list-style: none
+    margin: 0
+    padding: 0
+    counter-reset: index
+  p
+    margin: 0
+  .artist
+    font-size: 0.8em
+  .title
+    font-weight: bold
+  li
+    position: relative
+    padding: 10px
+    border-bottom: 1px solid #ddd
+    counter-increment: index
+    &:before
+      float: left
+      padding: 0.5em 1em 0.5em 0
+      content: counter(index,decimal-leading-zero)
+    &.playing
+      .title
+        color: $highlight
+      &:before
+        font-weight: bold
+      &:after
+        @extend .icon
+        position: absolute
+        font-size: 1.25em
+        right: 10px
+        top: 10px
+        padding: 0.3em
+        content: "playing"

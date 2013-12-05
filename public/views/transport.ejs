@@ -1,7 +1,10 @@
-<div id="controls">
+<nav>
   <button data-command="previous">previous</button>
-  <button data-command="play">play</button>
-  <button data-command="pause">pause</button>
+  <% if (status.attr('state') == 'play') { %>
+    <button data-command="pause">pause</button>
+  <% } else { %>
+    <button data-command="play">play</button>
+  <% } %>
   <button data-command="stop">stop</button>
   <button data-command="next">next</button>
-</div>
+</nav>

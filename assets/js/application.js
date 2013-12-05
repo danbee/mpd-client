@@ -18,7 +18,7 @@ $(document).ready(function() {
     };
 
     status.bind('change', function(event, attr, how, newVal, oldVal) {
-      if (attr == 'songid') {
+      if (attr == 'song') {
         mpdClient.queueSongs.updatePlaying(oldVal, newVal);
       }
     });

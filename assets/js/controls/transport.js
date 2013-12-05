@@ -5,13 +5,17 @@ var Transport = can.Control.extend({
     element.html(can.view('views/transport.ejs'));
   },
 
+  updateStatus: function(status) {
+    this.status.attr(status);
+  },
+
   sendCommand: function(command) {
     var self = this;
     can.ajax({
       url: '/api/control/' + command,
       type: 'PUT',
       success: function(status) {
-        self.status.attr(status);
+        self.updateStatus(status);
       }
     });
   },

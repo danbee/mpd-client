@@ -4,5 +4,6 @@
 
 //= require_tree ./models/
 //= require_tree ./controls/
+//= require_tree ./constructs/
 //= require ./router.js
 //= require ./application.js

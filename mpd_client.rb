@@ -28,12 +28,18 @@ class MPDClient < Sinatra::Base
   end
 
   def self.send_status
-    status = JSON MPDConnection.status
-    settings.connections.each { |out| out << "data: #{status}\n\n" }
+    response = JSON({ type: 'status', data: MPDConnection.status })
+    settings.connections.each { |out| out << "data: #{response}\n\n" }
+  end
+
+  def self.send_queue
+    response = JSON({ type: 'queue', data: Song.queue.map(&:to_h) })
+    settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 
   MPDConnection.mpd.on(:song) { |song| send_status }
   MPDConnection.mpd.on(:state) { |state| send_status }
+  MPDConnection.mpd.on(:playlist) { |playlist| send_queue }
 
   namespace '/api' do
 

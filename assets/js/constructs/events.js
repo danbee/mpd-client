@@ -1,0 +1,27 @@
+var Events = can.Construct.extend({
+
+  init: function(queue, status) {
+    this.events = new EventSource('/api/stream')
+
+    self = this
+
+    this.events.onmessage = function(e) {
+      response = JSON.parse(e.data);
+      switch (response.type) {
+        case 'status':
+          status.attr(response.data);
+          break;
+        case 'queue':
+          queue.replace(response.data);
+          break;
+      }
+    }
+
+    status.bind('change', function(event, attr, how, newVal, oldVal) {
+      if (attr == 'song') {
+        queue.updatePlaying(oldVal, newVal);
+      }
+    });
+  },
+
+});

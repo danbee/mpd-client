@@ -11,24 +11,13 @@ $(document).ready(function() {
         status: status
       }),
 
-      events: new EventSource('/api/stream'),
+      events: new Events(queueSongs, status),
 
       queue: new Queue('#queue', {
         queueSongs: queueSongs,
         status: status
       })
     };
-
-    mpdClient.events.onmessage = function(e) {
-      newStatus = JSON.parse(e.data);
-      status.attr(newStatus);
-    }
-
-    status.bind('change', function(event, attr, how, newVal, oldVal) {
-      if (attr == 'song') {
-        mpdClient.queueSongs.updatePlaying(oldVal, newVal);
-      }
-    });
 
   });
 

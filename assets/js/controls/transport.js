@@ -13,10 +13,7 @@ var Transport = can.Control.extend({
     var self = this;
     can.ajax({
       url: '/api/control/' + command,
-      type: 'PUT',
-      success: function(status) {
-        self.updateStatus(status);
-      }
+      type: 'PUT'
     });
   },
 

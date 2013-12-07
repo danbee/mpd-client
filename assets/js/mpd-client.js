@@ -1,4 +1,4 @@
-//= require ./libs/jquery-1.10.2.min
+//= require ./libs/jquery-2.0.3.min
 //= require ./libs/can.jquery.min.js
 //= require ./libs/can.ejs.js
 

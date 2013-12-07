@@ -38,9 +38,15 @@ class MPDClient < Sinatra::Base
     settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 
+  def self.send_time(elapsed, total)
+    response = JSON({ type: 'time', data: { elapsed: elapsed, total: total } })
+    settings.connections.each { |out| out << "data: #{response}\n\n" }
+  end
+
   MPDConnection.mpd.on(:song) { |song| send_status }
   MPDConnection.mpd.on(:state) { |state| send_status }
   MPDConnection.mpd.on(:playlist) { |playlist| send_queue }
+  MPDConnection.mpd.on(:time) { |elapsed, total| send_time(elapsed, total) }
 
   namespace '/api' do
 

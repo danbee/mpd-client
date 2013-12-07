@@ -4,6 +4,7 @@ Bundler.require(:default, ENV['RACK_ENV'])
 
 require 'sinatra/asset_pipeline'
 
+require 'sass'
 require 'json'
 require 'cgi'
 

@@ -6,9 +6,13 @@ var QueueSong = can.Model.extend({
 
 QueueSong.List = can.List.extend({
 
-  updatePlaying: function(oldVal, newVal) {
-    this.attr(oldVal).attr('playing', false);
-    this.attr(newVal).attr('playing', true);
+  updatePlaying: function(how, newVal, oldVal) {
+    if ((how == 'remove' || how == 'set') && this.attr(oldVal) != undefined) {
+      this.attr(oldVal).attr('playing', false);
+    }
+    if (how == 'add' || how == 'set') {
+      this.attr(newVal).attr('playing', true);
+    }
   }
 
 });

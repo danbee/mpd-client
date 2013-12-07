@@ -7,9 +7,10 @@ var Events = can.Construct.extend({
 
     this.events.onmessage = function(e) {
       response = JSON.parse(e.data);
+      console.log(response.data);
       switch (response.type) {
         case 'status':
-          status.attr(response.data);
+          status.attr(response.data, true);
           break;
         case 'queue':
           queue.replace(response.data);
@@ -19,7 +20,7 @@ var Events = can.Construct.extend({
 
     status.bind('change', function(event, attr, how, newVal, oldVal) {
       if (attr == 'song') {
-        queue.updatePlaying(oldVal, newVal);
+        queue.updatePlaying(how, newVal, oldVal);
       }
     });
   },

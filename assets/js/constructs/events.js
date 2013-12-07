@@ -7,7 +7,6 @@ var Events = can.Construct.extend({
 
     this.events.onmessage = function(e) {
       response = JSON.parse(e.data);
-      console.log(response.data);
       switch (response.type) {
         case 'status':
           status.attr(response.data, true);

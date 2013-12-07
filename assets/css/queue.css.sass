@@ -8,8 +8,14 @@
     margin: 0
   .artist
     font-size: 0.8em
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
   .title
     font-weight: bold
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
   li
     position: relative
     padding: 10px
@@ -20,6 +26,7 @@
       padding: 0.5em 1em 0.5em 0
       content: counter(index,decimal-leading-zero)
     &.playing
+      margin-right: 32px
       .title
         color: $highlight
       &:before
@@ -28,7 +35,7 @@
         @extend .icon
         position: absolute
         font-size: 1.25em
-        right: 10px
+        right: -22px
         top: 10px
         padding: 0.3em
         content: "playing"

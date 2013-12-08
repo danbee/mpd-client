@@ -5,6 +5,19 @@ var Queue = can.Control.extend({
       queueSongs: options.queueSongs,
       status: options.status
     }));
+  },
+
+  playSong: function(pos) {
+    can.ajax({
+      url: '/api/control/play',
+      data: { pos: pos },
+      type: 'PUT'
+    });
+  },
+
+  'li click': function(element, event) {
+    var pos = $(element).data('pos');
+    this.playSong(pos);
   }
 
 });

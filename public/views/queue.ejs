@@ -1,6 +1,6 @@
 <ol id="queue">
   <% list(queueSongs, function(song) { %>
-    <li id="<%= song.attr('id') %>" <%= song.attr('playing') ? 'class="playing"' : '' %>>
+    <li id="<%= song.attr('id') %>" data-pos="<%= song.attr('pos') %>" <%= song.attr('playing') ? 'class="playing"' : '' %>>
       <p class="title"><%= song.attr('title') %></p>
       <p class="artist"><%= song.attr('artist') %></p>
     </li>

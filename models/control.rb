@@ -6,8 +6,8 @@ class Control
       [:play, :stop, :next, :previous, :pause]
     end
 
-    def play
-      MPDConnection.mpd.play
+    def play(pos = nil)
+      MPDConnection.mpd.play(pos)
     end
 
     def stop

@@ -89,6 +89,10 @@ class MPDClient < Sinatra::Base
       JSON({ data: Song.queue.map(&:to_h) })
     end
 
+    put '/control/play' do
+      Control.play(params[:pos])
+    end
+
     put '/control/:action' do
       if Control.controls.include?(params[:action].to_sym)
         Control.send(params[:action])

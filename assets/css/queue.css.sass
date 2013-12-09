@@ -18,13 +18,14 @@
     text-overflow: ellipsis
   .length
     position: absolute
-    font-size: 0.8em
-    padding: 0.6em 0
+    font-size: 0.75em
+    padding: 0.8em 0
     right: 10px
     top: 10px
   li
     position: relative
     padding: 10px
+    padding-right: 42px
     border-bottom: 1px solid #ddd
     counter-increment: index
     &:before
@@ -32,7 +33,6 @@
       padding: 0.5em 1em 0.5em 0
       content: counter(index,decimal-leading-zero)
     &.playing
-      padding-right: 42px
       .title
         color: $highlight
       &:before

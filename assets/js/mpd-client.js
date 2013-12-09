@@ -3,6 +3,7 @@
 //= require ./libs/can.ejs.js
 
 //= require_tree ./models/
+//= require_tree ./helpers/
 //= require_tree ./controls/
 //= require_tree ./constructs/
 //= require ./router.js

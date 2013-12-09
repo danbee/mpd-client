@@ -14,6 +14,9 @@ var Events = can.Construct.extend({
         case 'queue':
           queue.replace(response.data);
           break;
+        case 'time':
+          status.attr('time', response.data);
+          break;
       }
     }
 

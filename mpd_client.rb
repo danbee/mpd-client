@@ -39,7 +39,7 @@ class MPDClient < Sinatra::Base
   end
 
   def self.send_time(elapsed, total)
-    response = JSON({ type: 'time', data: { elapsed: elapsed, total: total } })
+    response = JSON({ type: 'time', data: [elapsed, total] })
     settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 

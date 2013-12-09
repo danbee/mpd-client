@@ -1,0 +1,42 @@
+#transport
+  position: fixed
+  bottom: 0
+  width: 20em
+  background: rgba(248, 248, 248, 0.95)
+  border-top: 1px solid rgba(0, 0, 0, 0.1)
+  text-align: center
+  button
+    @extend .icon
+    font-size: 2em
+    width: 23%
+    padding: 0.5em
+    text-align: center
+    border: none
+    background: none
+    color: black
+    &:hover, &:focus
+      text-shadow: 0 0 10px rgba(255, 255, 255, 1)
+
+  .scrubber
+    @include clearfix
+    padding: 0.5em 25px 0
+    .time
+      font-size: 0.8em
+    .elapsed
+      float: left
+    .total
+      float: right
+
+  .track
+    position: relative
+    width: 70%
+    margin: 0.25em auto
+    height: 7px
+    background: rgba(127, 127, 127, 0.2)
+    .marker
+      position: absolute
+      background: #FD2D57
+      margin-left: -1px
+      margin-top: -4px
+      width: 2px
+      height: 15px

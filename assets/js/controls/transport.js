@@ -2,7 +2,12 @@ var Transport = can.Control.extend({
 
   init: function(element, options) {
     this.status = options.status;
-    element.html(can.view('views/transport.ejs', { status: this.status }));
+    element.html(
+      can.view(
+        'views/transport.ejs', { status: this.status },
+        { formatLength: timeHelpers.formatLength }
+      )
+    );
   },
 
   updateStatus: function(status) {

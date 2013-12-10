@@ -11,6 +11,8 @@ $(document).ready(function() {
         status: status
       }),
 
+      library: new Library('#library'),
+
       events: new Events(queueSongs, status),
 
       queue: new Queue('#queue', {

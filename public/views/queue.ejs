@@ -1,8 +1,8 @@
 <header>
-  <button id="library">Library</button>
+  <button class="library">Library</button>
   <h1>Queue</h1>
 </header>
-<ol id="queue">
+<ol class="queue">
   <% list(queueSongs, function(song) { %>
     <li id="<%= song.attr('id') %>" data-pos="<%= song.attr('pos') %>" <%= song.attr('playing') ? 'class="playing"' : '' %>>
       <p class="title"><%= song.attr('title') %></p>

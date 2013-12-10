@@ -1,12 +1,17 @@
-<% if (status.attr('state') == 'play' || status.attr('state') == 'pause') { %>
-  <div class="scrubber">
+<div class="scrubber">
+  <% if (status.attr('state') == 'play' || status.attr('state') == 'pause') { %>
     <div class="time elapsed"><%= formatLength(status.attr('time')[0]) %></div>
     <div class="time total">-<%= formatLength(status.attr('time')[1] - status.attr('time')[0]) %></div>
-    <div class="track">
+  <% } else { %>
+    <div class="time elapsed">--:--</div>
+    <div class="time total">--:--</div>
+  <% } %>
+  <div class="track">
+    <% if (status.attr('state') == 'play' || status.attr('state') == 'pause') { %>
       <div class="marker" style="left: <%= (status.attr('time')[0] / status.attr('time')[1]) * 100 %>%"></div>
-    </div>
+    <% } %>
   </div>
-<% } %>
+</div>
 <nav class="controls">
   <button data-command="previous">previous</button>
   <% if (status.attr('state') == 'play') { %>

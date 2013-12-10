@@ -3,7 +3,7 @@ require './models/mpd_connection'
 class Album < Struct.new(:title, :artist, :genre, :year)
 
   def initialize(album)
-    first_song = MPDConnection.mpd.search(:album, album).first
+    first_song = MPDConnection.mpd.where(album: album).first
     self.title = first_song.album
     self.artist = first_song.artist
     self.genre = first_song.genre
@@ -15,7 +15,7 @@ class Album < Struct.new(:title, :artist, :genre, :year)
   end
 
   def self.all
-    MPDConnection.mpd.albums.sort.map { |artist| self.new(album) }
+    MPDConnection.mpd.albums.sort.map { |album| self.new(album) }
   end
 
   def self.by_artist(artist)

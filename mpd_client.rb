@@ -63,25 +63,27 @@ class MPDClient < Sinatra::Base
 
     get '/albums' do
       content_type 'application/json'
-      JSON Album.all.map(&:to_h)
+      if params[:artist]
+        JSON Album.by_artist(CGI.unescape(params[:artist])).sort.map(&:to_h)
+      else
+        JSON Album.all.map(&:to_h)
+      end
     end
-
-    get '/artists/:artist' do
-      content_type 'application/json'
-      JSON Album.by_artist(CGI.unescape(params[:artist])).sort.map(&:to_h)
-    end
-
-    #get '/albums/:album' do
-      #JSON get_songs_by_album(CGI.unescape(params[:album]))
-    #end
-
-    #get '/artists/:artist/:album' do
-      #JSON get_songs_by_album(CGI.unescape(params[:album]))
-    #end
 
     get '/artists' do
       content_type 'application/json'
       JSON Artist.all.map(&:to_h)
+    end
+
+    get '/songs' do
+      content_type 'application/json'
+      if params[:artist] && params[:album]
+        JSON Song.by_album(CGI.unescape(params[:artist]), CGI.unescape(params[:album])).map(&:to_h)
+      elsif params[:artist]
+        JSON Song.by_artist(CGI.unescape(params[:artist])).map(&:to_h)
+      else
+        JSON Song.all.sort.map(&:to_h)
+      end
     end
 
     get '/queue' do

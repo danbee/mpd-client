@@ -7,7 +7,7 @@ gem 'sinatra-contrib'
 gem 'sinatra-asset-pipeline'
 gem 'foreman'
 
-gem 'ruby-mpd'
+gem 'ruby-mpd', git: 'git@github.com:archSeer/ruby-mpd.git'
 
 group :development, :test do
   gem 'pry'

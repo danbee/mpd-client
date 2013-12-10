@@ -1,5 +1,3 @@
-require './models/mpd_connection'
-
 class Song < Struct.new(:id, :artist, :album, :title, :length, :pos, :playing)
 
   def initialize(song, pos: nil, playing: false)
@@ -10,10 +8,5 @@ class Song < Struct.new(:id, :artist, :album, :title, :length, :pos, :playing)
     self.length = song.time
     self.pos = pos
     self.playing = playing
-  end
-
-  def self.queue
-    current_song = MPDConnection.mpd.status[:songid]
-    MPDConnection.mpd.queue.map { |song| self.new(song, playing: (song.id == current_song), pos: song.pos) }
   end
 end

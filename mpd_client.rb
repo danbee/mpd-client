@@ -8,11 +8,11 @@ require 'sass'
 require 'json'
 require 'cgi'
 
-require './models/mpd_connection'
 require './models/control'
 require './models/album'
 require './models/artist'
 require './models/song'
+require './models/mpd_connection'
 
 class MPDClient < Sinatra::Base
 
@@ -20,6 +20,9 @@ class MPDClient < Sinatra::Base
 
   set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
   set :assets_prefix, 'assets'
+
+  set mpd: MPDConnection.new
+
   register Sinatra::AssetPipeline
 
   register Sinatra::Namespace
@@ -28,30 +31,36 @@ class MPDClient < Sinatra::Base
     erb :index
   end
 
-  def self.send_status
-    response = JSON({ type: 'status', data: MPDConnection.status })
+  def send_status
+    puts "Sending status"
+    response = JSON({ type: 'status', data: status })
     settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 
-  def self.send_queue
-    response = JSON({ type: 'queue', data: Song.queue.map(&:to_h) })
+  def send_queue
+    puts "Sending queue"
+    response = JSON({ type: 'queue', data: queue })
     settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 
-  def self.send_time(elapsed, total)
+  def send_time(elapsed, total)
+    puts "Sending time"
     response = JSON({ type: 'time', data: [elapsed, total] })
     settings.connections.each { |out| out << "data: #{response}\n\n" }
   end
 
-  MPDConnection.mpd.on(:song) { |song| send_status }
-  MPDConnection.mpd.on(:state) { |state| send_status }
-  MPDConnection.mpd.on(:playlist) { |playlist| send_queue }
-  MPDConnection.mpd.on(:time) { |elapsed, total| send_time(elapsed, total) }
+  puts "Registering callbacks"
+  puts settings.mpd
+  settings.mpd.on(:song) { |song| send_status }
+  settings.mpd.on(:state) { |state| send_status }
+  settings.mpd.on(:playlist) { |playlist| send_queue }
+  settings.mpd.on(:time) { |elapsed, total| send_time(elapsed, total) }
 
   namespace '/api' do
 
     get '/status' do
-      JSON MPDConnection.status
+      puts settings.mpd.object_id
+      JSON settings.mpd.status
     end
 
     get '/stream', provides: 'text/event-stream' do
@@ -86,24 +95,23 @@ class MPDClient < Sinatra::Base
 
     get '/queue' do
       content_type 'application/json'
-      JSON({ data: Song.queue.map(&:to_h) })
+      JSON({ data: settings.mpd.queue })
     end
 
     put '/control/play' do
-      Control.play(params[:pos])
+      settings.mpd.play(params[:pos])
     end
 
     put '/control/:action' do
-      if Control.controls.include?(params[:action].to_sym)
-        Control.send(params[:action])
-      else
+      unless settings.mpd.command(params[:action].to_sym)
         not_found
       end
     end
 
     put '/control/volume/:value' do
-      content_type 'application/json'
-      Control.volume(params[:value])
+      unless settings.mpd.volume(params[:value].to_i)
+        status 422
+      end
     end
 
   end

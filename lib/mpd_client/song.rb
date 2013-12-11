@@ -12,7 +12,9 @@ module MPDClient
     end
 
     def playing?
-      self == self.class.current_song
+      if current = self.class.current_song
+        [artist, album, title]  == [current.artist, current.album, current.title]
+      end
     end
 
     def length
@@ -20,7 +22,7 @@ module MPDClient
     end
 
     def <=>(other)
-      [artist, album, title]  == [other.artist, other.album, other.title]
+      [artist, album, title] <=> [other.artist, other.album, other.title]
     end
 
     def to_h
@@ -51,7 +53,9 @@ module MPDClient
       end
 
       def current_song
-        new(MPDClient.conn.current_song)
+        if song = MPDClient.conn.current_song
+          new(song)
+        end
       end
     end
 

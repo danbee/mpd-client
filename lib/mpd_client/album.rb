@@ -3,6 +3,8 @@ module MPDClient
 
     include ClassToProc
     include Enumerable
+    include Jsonable
+
     extend Forwardable
 
     delegate %i(artist genre) => :@first_song

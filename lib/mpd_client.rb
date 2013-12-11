@@ -2,9 +2,10 @@ require 'forwardable'
 require 'ruby-mpd'
 require 'set'
 
-require File.expand_path('mpd_client/class_to_proc', __dir__)
-
 module MPDClient
+
+  autoload :Jsonable, File.expand_path('mpd_client/jsonable.rb', __dir__)
+  autoload :ClassToProc, File.expand_path('mpd_client/class_to_proc.rb', __dir__)
 
   autoload :Connection, File.expand_path('mpd_client/connection.rb', __dir__)
   autoload :Song, File.expand_path('mpd_client/song.rb', __dir__)

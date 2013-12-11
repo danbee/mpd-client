@@ -3,6 +3,8 @@ module MPDClient
 
     include ClassToProc
     include Comparable
+    include Jsonable
+
     extend Forwardable
 
     delegate %i(id track artist album title genre date time pos) => :@song

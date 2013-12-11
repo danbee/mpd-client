@@ -1,29 +1,15 @@
-#!/usr/bin/env ruby
-
-ENV['RACK_ENV'] ||= 'development'
-
-require 'bundler'
-
-Bundler.setup
-Bundler.require(:default, ENV['RACK_ENV'])
-
 require 'sinatra'
 require 'sinatra/asset_pipeline'
-
 require 'sass'
-require 'json'
 require 'cgi'
-
 require 'active_support/core_ext/hash/slice'
 
-require File.expand_path('../lib/mpd_client', __dir__)
-
 module MPDClient
-  class Application < Sinatra::Base
+  class Webserver < Sinatra::Base
 
     set server: 'thin'
 
-    set :root, File.expand_path('../', __dir__)
+    set :root, File.expand_path('../../', __dir__)
 
     set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
     set :assets_prefix, ['assets']
@@ -131,5 +117,3 @@ module MPDClient
 
   end
 end
-
-MPDClient::Application.run!

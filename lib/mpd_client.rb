@@ -1,6 +1,7 @@
 require 'forwardable'
 require 'ruby-mpd'
 require 'set'
+require 'json'
 
 module MPDClient
 
@@ -13,6 +14,9 @@ module MPDClient
   autoload :Artist, File.expand_path('mpd_client/artist.rb', __dir__)
   autoload :Control, File.expand_path('mpd_client/control.rb', __dir__)
   autoload :Queue, File.expand_path('mpd_client/queue.rb', __dir__)
+
+  # Don't want to automatically require this thing
+  autoload :Webserver, File.expand_path('mpd_client/webserver.rb', __dir__)
 
   MPD_HOST = ENV.fetch('MPD_HOST', 'localhost')
   MPD_PORT = ENV.fetch('MPD_PORT', 6600)

@@ -21,7 +21,11 @@ module MPDClient
     end
 
     def year
-      @first_song.year
+      @first_song.date
+    end
+
+    def <=>(other)
+      year <=> other.year
     end
 
     def to_h

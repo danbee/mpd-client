@@ -5,7 +5,7 @@ module MPDClient
     include Comparable
     extend Forwardable
 
-    delegate %i(id track artist album title time pos) => :@song
+    delegate %i(id track artist album title genre date time pos) => :@song
 
     def initialize(song, pos: nil)
       @song = song

@@ -2,12 +2,15 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+# todo: get everything working before going whole hog with the gem
+# gemspec
+
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-asset-pipeline'
 gem 'foreman'
-
 gem 'ruby-mpd', git: 'git@github.com:archSeer/ruby-mpd.git'
+gem 'active_support', require: false
 
 group :development, :test do
   gem 'pry'

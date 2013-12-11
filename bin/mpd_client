@@ -1,0 +1,134 @@
+#!/usr/bin/env ruby
+
+ENV['RACK_ENV'] ||= 'development'
+
+require 'bundler'
+
+Bundler.setup
+Bundler.require(:default, ENV['RACK_ENV'])
+
+require 'sinatra'
+require 'sinatra/asset_pipeline'
+
+require 'sass'
+require 'json'
+require 'cgi'
+
+require 'active_support/core_ext/hash/slice'
+
+require File.expand_path('../lib/mpd_client', __dir__)
+
+module MPDClient
+  class Application < Sinatra::Base
+
+    set server: 'thin'
+
+    set :root, File.expand_path('../', __dir__).to_s
+
+    set :assets_precompile, %w(app.js app.css *.png *.jpg *.svg *.eot *.ttf *.woff)
+    set :assets_prefix, ['assets']
+
+    register Sinatra::AssetPipeline
+    register Sinatra::Namespace
+
+    MPDClient.connect!
+
+    # TODO: Figure out why failing to supplying args breaks stuff
+    MPDClient.listen do
+      on :song do
+        each_conn do |conn|
+          json = { type: 'status', data: status }.to_json
+          conn << "data: #{json}\n\n"
+        end
+      end
+
+      on :state do
+        each_conn do |conn|
+          json = { type: 'status', data: status }.to_json
+          conn << "data: #{json}\n\n"
+        end
+      end
+
+      on :playlist do
+        each_conn do |conn|
+          json = { type: 'queue', data: Song.queue.map(&:to_h) }.to_json
+          conn << "data: #{json}\n\n"
+        end
+      end
+
+      on :time do |elapsed, total|
+        each_conn do |conn|
+          json = { type: 'time', data: [elapsed, total] }.to_json
+          conn << "data: #{json}\n\n"
+        end
+      end
+    end
+
+    get '/' do
+      erb :index
+    end
+
+    namespace '/api' do
+
+      get '/status' do
+        MPDClient.status.to_json
+      end
+
+      get '/stream', provides: 'text/event-stream' do
+        stream :keep_open do |conn|
+          MPDClient.connect_user(conn)
+          conn.callback { MPDClient.disconnect_user(conn) }
+        end
+      end
+
+      get '/albums' do
+        content_type 'application/json'
+        if params[:artist]
+          Album.by_artist(params[:artist]).sort.map(&:to_h).to_json
+        else
+          Album.all.to_json
+        end
+      end
+
+      get '/artists' do
+        content_type 'application/json'
+        Artist.all.map(&:to_h).to_json
+      end
+
+      get '/songs' do
+        content_type 'application/json'
+        if query = params.slice(:artist, :album) and !query.empty?
+          Song.by(**query).map(&:to_h).to_json
+        else
+          Song.all.sort.map(&:to_h).to_json
+        end
+      end
+
+      get '/queue' do
+        content_type 'application/json'
+        { data: Song.queue.map(&:to_h) }.to_json
+      end
+
+      put '/control/play' do
+        Control.play(params[:pos])
+      end
+
+      put '/control/:action' do
+        if Control.controls.include?(params[:action].to_sym)
+          Control.send(params[:action])
+        else
+          not_found
+        end
+      end
+
+      put '/control/volume/:value' do
+        content_type 'application/json'
+        Control.volume(params[:value])
+      end
+
+    end
+
+  end
+end
+
+MPDClient::Application.run!

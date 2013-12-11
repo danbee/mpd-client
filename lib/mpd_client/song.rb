@@ -50,10 +50,6 @@ module MPDClient
         MPDClient.conn.songs.map(&self)
       end
 
-      def queue
-        MPDClient.conn.queue.map(&self)
-      end
-
       def current_song
         if song = MPDClient.conn.current_song
           new(song)

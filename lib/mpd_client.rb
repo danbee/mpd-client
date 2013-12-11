@@ -12,6 +12,7 @@ module MPDClient
   autoload :Album, File.expand_path('mpd_client/album.rb', __dir__)
   autoload :Artist, File.expand_path('mpd_client/artist.rb', __dir__)
   autoload :Control, File.expand_path('mpd_client/control.rb', __dir__)
+  autoload :Queue, File.expand_path('mpd_client/queue.rb', __dir__)
 
   MPD_HOST = ENV.fetch('MPD_HOST', 'localhost')
   MPD_PORT = ENV.fetch('MPD_PORT', 6600)

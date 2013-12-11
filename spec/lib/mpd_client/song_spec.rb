@@ -11,13 +11,6 @@ describe MPDClient::Song do
     MPDClient.conn.stub(:queue).and_return([song1, song2])
   end
 
-  describe "#queue" do
-    it "returns the list of songs" do
-      queue = subject.queue
-      expect(queue).to have(2).items
-    end
-  end
-
   describe "#playing?" do
     let(:playing_song) { subject.new(song1) }
     let(:not_playing_song) { subject.new(song2) }

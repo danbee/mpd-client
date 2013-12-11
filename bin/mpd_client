@@ -123,7 +123,9 @@ module MPDClient
 
       put '/control/volume/:value' do
         content_type 'application/json'
-        Control.volume(params[:value])
+        unless Control.volume(params[:value].to_i)
+          status 422
+        end
       end
 
     end

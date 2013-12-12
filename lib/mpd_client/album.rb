@@ -2,7 +2,6 @@ module MPDClient
   class Album
 
     include ClassToProc
-    include Enumerable
     include Jsonable
 
     extend Forwardable
@@ -10,12 +9,7 @@ module MPDClient
     delegate %i(artist genre) => :@first_song
 
     def initialize(album)
-      @songs = MPDClient::Song.by(album: album)
-      @first_song = @songs.first
-    end
-
-    def each(&block)
-      @songs.each(&block)
+      @first_song = MPDClient::Song.by(album: album).first
     end
 
     def title
@@ -35,8 +29,7 @@ module MPDClient
         title: title,
         artist: artist,
         genre: genre,
-        year: year,
-        songs: self.map(&:to_h)
+        year: year
       }
     end
 

@@ -2,7 +2,6 @@ module MPDClient
   class Song
 
     include ClassToProc
-    include Comparable
     include Jsonable
 
     extend Forwardable

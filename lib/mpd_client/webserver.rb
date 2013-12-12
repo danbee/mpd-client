@@ -3,6 +3,7 @@ require 'sinatra/asset_pipeline'
 require 'sass'
 require 'cgi'
 require 'active_support/core_ext/hash/slice'
+require 'active_support/core_ext/hash/keys'
 
 module MPDClient
   class Webserver < Sinatra::Base
@@ -82,7 +83,7 @@ module MPDClient
 
       get '/songs' do
         content_type 'application/json'
-        if query = params.slice(:artist, :album) and !query.empty?
+        if query = params.symbolize_keys.slice(:artist, :album) and !query.empty?
           Song.by(**query).to_json
         else
           Song.all.sort.to_json

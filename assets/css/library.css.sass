@@ -7,5 +7,12 @@
   height: 100%
   width: 100%
   z-index: 2
+  &.show
+    display: block
   header
     @extend .header
+    a.close
+      position: absolute
+      right: 10px
+      top: 8px
+      @include button

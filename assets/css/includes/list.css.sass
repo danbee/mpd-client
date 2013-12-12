@@ -1,0 +1,19 @@
+.list
+  list-style: none
+  margin: 0
+  padding: 0
+  li
+    position: relative
+    padding: 10px
+    padding-right: 42px
+    border-bottom: 1px solid #ddd
+
+.ordered-list
+  @extend .list
+  counter-reset: index
+  li
+    counter-increment: index
+    &:before
+      float: left
+      padding: 0.5em 1em 0.5em 0
+      content: counter(index,decimal-leading-zero)

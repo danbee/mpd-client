@@ -5,16 +5,29 @@
   header
     z-index: 1
     @extend .header
-    button.library
+    a.library
       position: absolute
       left: 10px
       top: 8px
       @include button
   ol
-    list-style: none
-    margin: 0
-    padding: 0
-    counter-reset: index
+    @extend .ordered-list
+    li
+      &.playing
+        .title
+          color: $highlight
+        &:before
+          font-weight: bold
+        &:after
+          @extend .icon
+          position: absolute
+          font-size: 1.25em
+          right: 10px
+          top: 10px
+          padding: 0.3em
+          content: "playing"
+        .length
+          display: none
   p
     margin: 0
   .artist
@@ -33,28 +46,3 @@
     padding: 0.8em 0
     right: 10px
     top: 10px
-  li
-    position: relative
-    padding: 10px
-    padding-right: 42px
-    border-bottom: 1px solid #ddd
-    counter-increment: index
-    &:before
-      float: left
-      padding: 0.5em 1em 0.5em 0
-      content: counter(index,decimal-leading-zero)
-    &.playing
-      .title
-        color: $highlight
-      &:before
-        font-weight: bold
-      &:after
-        @extend .icon
-        position: absolute
-        font-size: 1.25em
-        right: 10px
-        top: 10px
-        padding: 0.3em
-        content: "playing"
-      .length
-        display: none

@@ -1,6 +1,10 @@
+ENV['RACK_ENV'] ||= 'development'
+
 require 'bundler'
 
 Bundler.setup
-require './mpd_client'
+Bundler.require(:default, ENV['RACK_ENV'])
 
-run MPDClient
+require File.expand_path('lib/mpd_client', __dir__)
+
+run MPDClient::Webserver

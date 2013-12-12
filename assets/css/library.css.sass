@@ -16,3 +16,26 @@
       right: 10px
       top: 8px
       @include button
+  .browser
+    position: absolute
+    height: 100%
+    @include transition(left 0.25s ease-in-out)
+    &[data-pane="2"]
+      left: -$interface-width
+    &[data-pane="3"]
+      left: -$interface-width * 2
+    &[data-pane="4"]
+      left: -$interface-width * 3
+    ul, ol
+      position: absolute
+      width: $interface-width
+      @extend .list
+      height: 100%
+      &:first-child
+        left: 0
+      &:nth-child(2)
+        left: $interface-width
+      &:nth-child(3)
+        left: $interface-width * 2
+      &:nth-child(4)
+        left: $interface-width * 3

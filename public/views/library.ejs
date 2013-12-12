@@ -2,6 +2,7 @@
   <a class="close" href="#!">Close</a>
   <h1>Library</h1>
 </header>
-<ol class="list">
-  <%== can.view.render('views/library/root.ejs', {}) %>
-</ol>
+<div class="browser" data-pane="<%= browser.attr('pane') %>">
+  <div class="root"></div>
+  <%# can.view.render('views/library/root.ejs', {}) %>
+</div>

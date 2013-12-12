@@ -24,7 +24,7 @@ module MPDClient
     end
 
     def <=>(other)
-      [artist, album, title] <=> [other.artist, other.album, other.title]
+      [artist, album, track] <=> [other.artist, other.album, other.track]
     end
 
     def to_h

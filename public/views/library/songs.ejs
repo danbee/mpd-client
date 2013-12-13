@@ -1,7 +1,9 @@
 <ol class="songs">
   <% list(items, function(song) { %>
     <li id="<%= song.attr('id') %>">
-      <%= song.attr('title') %>
+      <p class="title"><%= song.attr('title') %></p>
+      <p class="artist"><%= song.attr('artist') %></p>
+      <p class="length"><%= formatLength(song.attr('length')) %></p>
     </li>
   <% }) %>
 </ol>

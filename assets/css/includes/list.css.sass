@@ -17,3 +17,25 @@
       float: left
       padding: 0.5em 1em 0.5em 0
       content: counter(index,decimal-leading-zero)
+
+.song-list
+  @extend .ordered-list
+  li
+    p
+      margin: 0
+    .artist
+      font-size: 0.8em
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+    .title
+      font-weight: bold
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+    .length
+      position: absolute
+      font-size: 0.75em
+      padding: 0.8em 0
+      right: 10px
+      top: 10px

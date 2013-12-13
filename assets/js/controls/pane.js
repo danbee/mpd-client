@@ -16,7 +16,7 @@ var Pane = can.Control.extend({
   renderPane: {
     root: function() {
       this.element.html(
-        can.view('views/library/root.ejs', {})
+        can.view('views/library/root.ejs', { pane: 0 })
       );
       this.title = 'Library';
     },
@@ -43,7 +43,7 @@ var Pane = can.Control.extend({
   renderCallback: function(type) {
     return function(items) {
       $(this.element).html(
-        can.view('views/library/' + type + '.ejs', { items: items }, { formatLength: timeHelpers.formatLength })
+        can.view('views/library/' + type + '.ejs', { items: items, pane: this.data.pos }, { formatLength: timeHelpers.formatLength })
       );
     }.bind(this)
   }

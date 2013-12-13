@@ -3,6 +3,7 @@
     <li id="<%= artist.attr('id') %>">
       <%== can.route.link(artist.attr('name'), {
         page: 'library',
+        pane: pane + 1,
         show: 'albums',
         artist: artist.attr('name')
       }) %>

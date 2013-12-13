@@ -35,8 +35,10 @@ var Library = can.Control.extend({
   addPane: function(data) {
     var newElement = document.createElement('div');
     $('.browser', this.element).append(newElement);
+
     data['pos'] = this.panes.length;
     var newPane = new Pane(newElement, data);
+
     this.panes.push(newPane);
     this.setTitle(newPane.title);
     this.nextPane();

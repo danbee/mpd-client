@@ -2,7 +2,7 @@ var Library = can.Control.extend({
 
   init: function(element, options) {
     this.element = element;
-    this.browser = new can.Model({ title: 'Library', currentPane: 1 });
+    this.browser = new can.Model({ title: 'Library', currentPane: 0 });
     element.html(
       can.view('views/library.ejs', { browser: this.browser })
     );
@@ -19,20 +19,26 @@ var Library = can.Control.extend({
   },
 
   nextPane: function() {
-    this.browser.attr('currentPane', this.browser.attr('currentPane') + 1);
+    var currentPane = this.browser.attr('currentPane');
+    this.browser.attr('currentPane', currentPane + 1);
   },
 
   previousPane: function() {
-    this.browser.attr('currentPane', this.browser.attr('currentPane') - 1);
+    var currentPane = this.browser.attr('currentPane');
+    this.browser.attr('currentPane', currentPane - 1);
+  },
+
+  setTitle: function(title) {
+    this.browser.attr('title', title);
   },
 
   addPane: function(data) {
     var newElement = document.createElement('div');
     $('.browser', this.element).append(newElement);
-    data['pos'] = this.panes.length + 1;
+    data['pos'] = this.panes.length;
     var newPane = new Pane(newElement, data);
     this.panes.push(newPane);
-    this.browser.attr('title', newPane.title);
+    this.setTitle(newPane.title);
     this.nextPane();
   },
 
@@ -49,54 +55,6 @@ var Library = can.Control.extend({
         this.addPane(data);
       }
     }
-  }
-
-});
-
-var Pane = can.Control.extend({
-
-  init: function(element, data) {
-    this.element = element;
-    this.element.addClass(data.show);
-    var left = (data.pos - 1) * 20;
-    this.element.css('left', left + 'em');
-    this.data = data;
-    this.renderPane[data.show].call(this, data);
-  },
-
-  renderPane: {
-    root: function() {
-      this.element.html(
-        can.view('views/library/root.ejs', {})
-      );
-      this.title = 'Library';
-    },
-    artists: function(data) {
-      Artist.findAll({}, this.renderCallback('artists'));
-      this.title = 'Artists';
-    },
-    albums: function(data) {
-      Album.findAll({ artist: data.artist }, this.renderCallback('albums'));
-      if (data.artist)
-        this.title = data.artist;
-      else
-        this.title = 'Albums';
-    },
-    songs: function(data) {
-      Song.findAll({ artist: data.artist, album: data.album }, this.renderCallback('songs'));
-      if (data.album)
-        this.title = data.album;
-      else
-        this.title = 'Songs';
-    }
-  },
-
-  renderCallback: function(type) {
-    return function(items) {
-      $(this.element).html(
-        can.view('views/library/' + type + '.ejs', { items: items })
-      );
-    }.bind(this)
   }
 
 });

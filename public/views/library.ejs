@@ -2,7 +2,11 @@
   <a class="close" href="#!">Close</a>
   <h1><%= browser.attr('title') %></h1>
 </header>
-<div class="browser" data-pane="<%= browser.attr('pane') %>">
-  <div class="root"></div>
-  <%# can.view.render('views/library/root.ejs', {}) %>
+
+<div class="browser"
+     data-current-pane="<%= browser.attr('currentPane') %>"
+     style="left: -<%= (browser.attr('currentPane') - 1) * 20 %>em;">
+
+  <div class="root" style="left: 0;"></div>
+
 </div>

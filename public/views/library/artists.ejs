@@ -1,5 +1,5 @@
 <ol class="artists">
-  <% list(artists, function(artist) { %>
+  <% list(items, function(artist) { %>
     <li id="<%= artist.attr('id') %>">
       <%== can.route.link(artist.attr('name'), {
         page: 'library',

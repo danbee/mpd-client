@@ -1,11 +1,11 @@
 <ol class="albums">
-  <% list(albums, function(album) { %>
+  <% list(items, function(album) { %>
     <li id="<%= album.attr('id') %>">
       <%== can.route.link(album.attr('title'), {
         page: 'library',
         show: 'songs',
         artist: album.attr('artist'),
-        album: album.attr('album')
+        album: album.attr('title')
       }) %>
     </li>
   <% }) %>

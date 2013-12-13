@@ -2,11 +2,11 @@ var Library = can.Control.extend({
 
   init: function(element, options) {
     this.element = element;
-    this.browser = new can.Model({ pane: 1 });
+    this.browser = new can.Model({ title: 'Library', pane: 1 });
     element.html(
       can.view('views/library.ejs', { browser: this.browser })
     );
-    var rootControl = new Pane('#library .root', { show: 'root' })
+    var rootControl = new Pane('#library .root', { show: 'root' });
     this.panes = new can.List([rootControl]);
   },
 
@@ -26,11 +26,27 @@ var Library = can.Control.extend({
     this.browser.attr('pane', this.browser.attr('pane') - 1);
   },
 
+  addPane: function(data) {
+    var newElement = document.createElement('div');
+    newElement.className = data.show;
+    $('.browser', this.element).append(newElement);
+    var newPane = new Pane(newElement, data);
+    this.panes.push(newPane);
+    this.nextPane();
+  },
+
   'a.close click': 'hide',
+
+  'route': function(data) {
+    this.hide();
+  },
 
   ':page route': function(data) {
     if (data.page == 'library') {
       this.show();
+      if (data.show) {
+        this.addPane(data);
+      }
     }
   }
 
@@ -38,7 +54,7 @@ var Library = can.Control.extend({
 
 var Pane = can.Control.extend({
 
-  init: function(element, data, pane) {
+  init: function(element, data) {
     this.element = element;
     this.data = data;
     this.renderPane[data.show].call(this, data);
@@ -51,13 +67,13 @@ var Pane = can.Control.extend({
       );
     },
     artists: function(data) {
-      Artist.findAll({}, renderCallback('artists'));
+      Artist.findAll({}, this.renderCallback('artists'));
     },
     albums: function(data) {
-      Album.findAll({ artist: data.artist }, renderCallback('albums'));
+      Album.findAll({ artist: data.artist }, this.renderCallback('albums'));
     },
     songs: function(data) {
-      Song.findAll({ artist: data.artist, album: data.album }, renderCallback('songs'));
+      Song.findAll({ artist: data.artist, album: data.album }, this.renderCallback('songs'));
     }
   },
 

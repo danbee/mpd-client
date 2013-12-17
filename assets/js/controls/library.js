@@ -44,6 +44,10 @@ var Library = can.Control.extend({
     this.nextPane();
   },
 
+  removePane: function(data) {
+    this.previousPane();
+  },
+
   'a.close click': 'hide',
 
   'route': function(data) {
@@ -53,8 +57,11 @@ var Library = can.Control.extend({
   ':page route': function(data) {
     if (data.page == 'library') {
       this.show();
-      if (data.show) {
+      if (data.pane > this.browser.currentPane) {
         this.addPane(data);
+      }
+      else if (data.pane < this.browser.currentPane) {
+        this.removePane(data);
       }
     }
   }

@@ -1,4 +1,7 @@
 <header>
+  <% if (browser.attr('currentPane') > 0) { %>
+    <%== can.route.link('Back', { page: 'library', pane: browser.attr('currentPane') - 1 }, { class: 'back' }) %>
+  <% } %>
   <a class="close" href="#!">Close</a>
   <h1><%= browser.attr('title') %></h1>
 </header>

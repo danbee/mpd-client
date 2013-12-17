@@ -16,6 +16,15 @@
       right: 10px
       top: 8px
       @include button
+    a.back
+      position: absolute
+      left: 10px
+      top: 8px
+      &:before
+        margin-right: 0.25em
+        @extend .icon
+      @extend .icon-chevron-left
+      @include button
   &.show
     top: 0
     header

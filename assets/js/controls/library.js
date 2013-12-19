@@ -4,7 +4,7 @@ var Library = can.Control.extend({
     this.element = element;
     this.browser = new can.Model({ title: 'Library', currentPane: 0 });
     element.html(
-      can.view('views/library.ejs', { browser: this.browser })
+      can.view('views/library.mustache', { browser: this.browser })
     );
     var rootControl = new Pane('#library .root', { show: 'root' });
     this.panes = new can.List([rootControl]);

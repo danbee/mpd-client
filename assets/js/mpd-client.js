@@ -6,6 +6,6 @@
 //= require_tree ./models/
 //= require_tree ./helpers/
 //= require_tree ./controls/
-//= require_tree ./components/
 //= require_tree ./constructs/
+//= require_tree ./components/
 //= require ./application.js

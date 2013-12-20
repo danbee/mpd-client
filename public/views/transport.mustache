@@ -1,0 +1,24 @@
+<div class="scrubber">
+  {{#if status.playingOrPaused()}}
+    <div class="time elapsed"><%= formatLength(status.attr('time')[0]) %></div>
+    <div class="time total">-<%= formatLength(status.attr('time')[1] - status.attr('time')[0]) %></div>
+  {{else}}
+    <div class="time elapsed">--:--</div>
+    <div class="time total">--:--</div>
+  {{/if}}
+  <div class="track">
+    {{#if playingOrPaused()}}
+      <div class="marker" style="left: {{status.markerPosition()}}"></div>
+    {{/if}}
+  </div>
+</div>
+<nav class="controls">
+  <button data-command="previous">previous</button>
+  {{#if status.playing()}}
+    <button data-command="pause">pause</button>
+  {{else}}
+    <button data-command="play">play</button>
+  {{/if}}
+  <button data-command="stop">stop</button>
+  <button data-command="next">next</button>
+</nav>

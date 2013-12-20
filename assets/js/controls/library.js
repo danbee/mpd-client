@@ -2,12 +2,10 @@ var Library = can.Control.extend({
 
   init: function(element, options) {
     this.element = element;
-    this.browser = new can.Model({ title: 'Library', currentPane: 0 });
+    this.browser = new can.Model({ title: 'Library', currentDepth: 0 });
     element.html(
       can.view('views/library.mustache', { browser: this.browser })
     );
-    var rootControl = new Pane('#library .root', { show: 'root' });
-    this.panes = new can.List([rootControl]);
   },
 
   show: function() {
@@ -33,11 +31,8 @@ var Library = can.Control.extend({
   },
 
   addPane: function(data) {
-    var newElement = document.createElement('div');
+    var newElement = document.createElement('panel');
     $('.browser', this.element).append(newElement);
-
-    data['pos'] = this.panes.length;
-    var newPane = new Pane(newElement, data);
 
     this.panes.push(newPane);
     this.setTitle(newPane.title);

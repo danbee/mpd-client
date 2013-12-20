@@ -1,15 +1,12 @@
 can.Component.extend({
 
-  init: function() {
-    console.log('Initializing');
-  },
-
-  tag: 'panel',
+  tag: 'mpd-panel',
 
   template: can.view('views/panel.mustache'),
 
   scope: {
     show: '@',
+    depth: '@',
     artist: '@',
     album: '@',
     title: function() {
@@ -18,17 +15,13 @@ can.Component.extend({
     },
     fetchItems: {
       root: new can.Map,
-      artists: Artist.findAll({}),
-      albums: Album.findAll({ artist: this.artist }),
-      songs: Song.findAll({ artist: this.artist, album: this.album })
+      artists: function() { return Artist.findAll({}) },
+      albums: function() { Album.findAll({ artist: this.artist }) },
+      songs: function() { Song.findAll({ artist: this.artist, album: this.album }) }
     }
   },
 
-  events: {
-    inserted: function() {
-      console.log('Panel inserted.');
-    }
-  },
+  events: {},
 
   helpers: {
     renderItems: function() {

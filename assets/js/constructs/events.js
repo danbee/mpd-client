@@ -13,6 +13,7 @@ var Events = can.Construct.extend({
           break;
         case 'queue':
           queue.replace(response.data);
+          debugger;
           break;
         case 'time':
           status.attr('time', response.data);
@@ -22,6 +23,7 @@ var Events = can.Construct.extend({
 
     status.bind('change', function(event, attr, how, newVal, oldVal) {
       if (attr == 'song') {
+        debugger;
         queue.updatePlaying(how, newVal, oldVal);
       }
     });

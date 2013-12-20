@@ -1,7 +1,5 @@
-#queue
+mpd-queue
   height: 100%
-  overflow: auto
-  padding: 2.5em 0 5.625em
   header
     z-index: 1
     @extend .header
@@ -11,6 +9,9 @@
       top: 8px
       @include button
   ol
+    padding: 2.5em 0 5.625em
+    height: 100%
+    overflow: auto
     @extend .song-list
     li.playing
       .title

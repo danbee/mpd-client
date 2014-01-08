@@ -7,4 +7,4 @@ window.timeHelpers = {
     }
     return minutes + ':' + seconds;
   }
-}
+};

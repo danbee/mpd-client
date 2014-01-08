@@ -3,11 +3,11 @@
   <h1>Queue</h1>
 </header>
 <ol class="queue">
-  {{#each queueSongs}}
+  {{#queueSongs}}
     <li id="{{id}}" data-pos="{{pos}}" class="{{#playing}}playing{{/playing}}">
       <p class="title">{{title}}</p>
       <p class="artist">{{artist}}</p>
-      <p class="length">{{formatLength length}}</p>
+      <p class="length">{{formattedLength}}</p>
     </li>
-  {{/each}}
+  {{/queueSongs}}
 </ol>

@@ -2,17 +2,21 @@ var QueueSong = can.Model.extend({
 
   findAll: 'GET /api/queue'
 
-}, {});
+}, {
+
+  formattedLength: function() {
+    return timeHelpers.formatLength(this.length)
+  }
+
+});
 
 QueueSong.List = can.List.extend({
 
-  updatePlaying: function(how, newVal, oldVal) {
-    if ((how == 'remove' || how == 'set') && this.attr(oldVal) != undefined) {
-      this.attr(oldVal).attr('playing', false);
-    }
-    if (how == 'add' || how == 'set') {
-      this.attr(newVal).attr('playing', true);
-    }
+  updatePlaying: function(newSong) {
+    this.each(function(item) {
+      item.attr('playing', false);
+    });
+    this.attr(newSong).attr('playing', true);
   }
 
 });

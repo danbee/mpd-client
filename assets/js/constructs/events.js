@@ -1,6 +1,6 @@
 var Events = can.Construct.extend({
 
-  init: function(queue, status) {
+  init: function(scope) {
     this.events = new EventSource('/api/stream')
 
     self = this
@@ -9,24 +9,16 @@ var Events = can.Construct.extend({
       response = JSON.parse(e.data);
       switch (response.type) {
         case 'status':
-          status.attr(response.data, true);
+          scope.attr('status').attr(response.data);
           break;
         case 'queue':
-          queue.replace(response.data);
-          debugger;
+          scope.attr('queueSongs', response.data);
           break;
         case 'time':
-          status.attr('time', response.data);
+          scope.attr('status.time', response.data);
           break;
       }
     }
-
-    status.bind('change', function(event, attr, how, newVal, oldVal) {
-      if (attr == 'song') {
-        debugger;
-        queue.updatePlaying(how, newVal, oldVal);
-      }
-    });
   },
 
 });

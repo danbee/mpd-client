@@ -5,13 +5,14 @@ can.Component.extend({
   template: can.view('views/app.mustache'),
 
   scope: {
-    queueSongs: new can.List(),
-    status: new can.Map()
+    queueSongs: new QueueSong.List(),
+    status: new Status
   },
 
   events: {
     init: function(element, options) {
-      this.scope.attr('events', new Events(this.scope.queueSongs, this.scope.status));
+      Status.findOne({}, this.updateStatus.bind(this));
+      this.scope.attr('events', new Events(this.scope));
       this.fetch();
     },
 
@@ -22,8 +23,16 @@ can.Component.extend({
       });
     },
 
+    updateStatus: function(result) {
+      this.scope.attr('status', result);
+    },
+
     update: function(songs) {
       this.scope.attr('queueSongs', songs);
+    },
+
+    '{scope.status} change': function() {
+      this.scope.attr('queueSongs').updatePlaying(this.scope.status.song);
     }
   }
 

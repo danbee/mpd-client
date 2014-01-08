@@ -29,20 +29,15 @@ mpd-library
     top: 0
     header
       top: 0
-  .browser
-    position: absolute
-    height: 100%
+  ul, ol
     width: 100%
-    @include transition(left 0.25s ease-in-out)
-    ul, ol
-      width: 100%
-    ul.root, ol.artists, ol.albums
-      @extend .list
-    ol.songs
-      @extend .song-list
-    mpd-panel
-      position: absolute
-      width: $interface-width
-      height: 100%
-      padding: 2.5em 0 0
-      overflow: auto
+  ul.root, ol.artists, ol.albums
+    @extend .list
+  ol.songs
+    @extend .song-list
+  mpd-panel
+    position: absolute
+    width: $interface-width
+    height: 100%
+    padding: 2.5em 0 0
+    overflow: auto

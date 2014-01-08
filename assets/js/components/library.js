@@ -4,6 +4,10 @@ can.Component.extend({
 
   template: can.view('views/library.mustache'),
 
+  scope: {
+    currentPane: 0
+  },
+
   events: {
     show: function() {
       $(this.element).addClass('show');
@@ -13,15 +17,17 @@ can.Component.extend({
       $(this.element).removeClass('show');
     },
 
-    'a.close click': 'hide',
+    'route': function(data) {
+      this.hide();
+    },
 
     ':type route': function(data) {
       if (data.type == 'library') {
         this.show();
-        if (data.pane > this.browser.currentPane) {
+        if (data.pane > this.currentPane) {
           this.addPane(data);
         }
-        else if (data.pane < this.browser.currentPane) {
+        else if (data.pane < this.currentPane) {
           this.removePane(data);
         }
       }

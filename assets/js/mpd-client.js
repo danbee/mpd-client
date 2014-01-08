@@ -4,8 +4,7 @@
 
 //= require ./routes.js
 //= require_tree ./helpers/
-//= require_tree ./models/
-//= require_tree ./controls/
 //= require_tree ./constructs/
+//= require_tree ./models/
 //= require_tree ./components/
 //= require ./application.js

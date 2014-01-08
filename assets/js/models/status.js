@@ -4,6 +4,22 @@ var Status = can.Model.extend({
 
 }, {
 
+  init: function() {
+    server.eventSource.addEventListener('message', this.updateStatus.bind(this));
+  },
+
+  updateStatus: function(event) {
+    var response = JSON.parse(event.data);
+      switch (response.type) {
+        case 'status':
+          this.attr(response.data);
+          break;
+        case 'time':
+          this.attr('time', response.data);
+          break;
+      }
+  },
+
   playing: function() {
     return this.attr('state') === 'play'
   },

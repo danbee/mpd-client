@@ -6,13 +6,12 @@ can.Component.extend({
 
   scope: {
     queueSongs: new QueueSong.List(),
-    status: new Status
+    status: new can.Map()
   },
 
   events: {
     init: function(element, options) {
       Status.findOne({}, this.updateStatus.bind(this));
-      this.scope.attr('events', new Events(this.scope));
       this.fetch();
     },
 

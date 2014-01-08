@@ -13,11 +13,10 @@ var QueueSong = can.Model.extend({
 QueueSong.List = can.List.extend({
 
   init: function() {
-    server.eventSource.addEventListener('message', this.updateQueue.bind(this));
+    server.onMessage(this.updateQueue.bind(this));
   },
 
-  updateQueue: function(event) {
-    var response = JSON.parse(event.data);
+  updateQueue: function(response) {
     if (response.type === 'queue') {
       this.attr(response.data, true);
     }
@@ -27,7 +26,9 @@ QueueSong.List = can.List.extend({
     this.each(function(item) {
       item.attr('playing', false);
     });
-    this.attr(newSong).attr('playing', true);
+    if (this.attr(newSong) !== undefined) {
+      this.attr(newSong).attr('playing', true);
+    }
   }
 
 });

@@ -4,17 +4,18 @@ can.Component.extend({
 
   template: can.view('views/panels/artists.mustache'),
 
-  init: function() {
-    var self = this;
-    Artist.findAll({}, function(data) {
-      console.log(data);
-      self.scope.attr('items', data);
-      self._control.element.trigger('showPanel', self.scope.depth);
-    });
-  },
-
   scope: {
     depth: "@"
+  },
+
+  events: {
+    init: function() {
+      var self = this;
+      Artist.findAll({}, function(data) {
+        self.scope.attr('items', data);
+        self.element.trigger('switchPanel', self.scope.depth);
+      });
+    }
   },
 
   helpers: {

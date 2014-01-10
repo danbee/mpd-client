@@ -46,7 +46,7 @@ can.Component.extend({
       }
     },
 
-    ' showPanel': function(el, ev, data) {
+    ' switchPanel': function(el, ev, data) {
       this.scope.attr('currentDepth', data);
     }
   }

@@ -4,13 +4,6 @@ can.Component.extend({
 
   template: can.view('views/panels/albums.mustache'),
 
-  init: function() {
-    var self = this;
-    Album.findAll({ artist: this.scope.artist }, function(data) {
-      self.scope.attr('items', data);
-    });
-  },
-
   scope: {
     depth: "@",
     artist: "@",
@@ -24,9 +17,19 @@ can.Component.extend({
     }
   },
 
+  events: {
+    init: function() {
+      var self = this;
+      Album.findAll({ artist: this.scope.artist }, function(data) {
+        self.scope.attr('items', data);
+        self.element.trigger('switchPanel', self.scope.depth);
+      });
+    }
+  },
+
   helpers: {
     link: function(item) {
-      return can.route.link(item.name, {
+      return can.route.link(item.title, {
         type: 'library',
         show: 'songs',
         artist: item.artist,

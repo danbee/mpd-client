@@ -1,11 +1,15 @@
 mpd-library
-  background: white
   position: absolute
+  background: white
   top: 100%
   height: 100%
   width: 100%
   z-index: 2
   @include transition(top 0.35s ease-in-out)
+  .panels
+    position: absolute
+    height: 100%
+    @include transition(left 0.35s ease-in-out)
   header
     top: 100%
     z-index: 1
@@ -35,9 +39,10 @@ mpd-library
     @extend .list
   ol.songs
     @extend .song-list
-  mpd-panel
+  mpd-panel-root, mpd-panel-artists, mpd-panel-albums, mpd-panel-songs
     position: absolute
     width: $interface-width
     height: 100%
     padding: 2.5em 0 0
     overflow: auto
+    left: calc(attr(depth) * 20em)

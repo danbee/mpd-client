@@ -13,14 +13,15 @@ can.Component.extend({
       if (this.show == 'root') return 'Library';
     },
     fetchItems: {
-      root: new can.List(['Artists', 'Albums', 'Songs']),
+      root: [
+        { label: 'Artists', show: 'artists' },
+        { label: 'Albums', show: 'albums' },
+        { label: 'Songs', show: 'songs' }
+      ],
       artists: function() { return Artist.findAll({}) },
       albums: function() { Album.findAll({ artist: this.artist }) },
       songs: function() { Song.findAll({ artist: this.artist, album: this.album }) }
     }
-  },
-
-  events: {
   },
 
   helpers: {
@@ -30,10 +31,22 @@ can.Component.extend({
       });
     },
 
-    rootLink: function(label, show) {
-      return can.route.link(label, {
-        type: 'library', show: show
+    rootLink: function(item) {
+      console.log(item);
+      return can.route.link(item.label, {
+        type: 'library',
+        show: item.show,
+        depth: +this.depth + 1
       });
+    },
+
+    artistLink: function(item) {
+      return can.route.link(item.attr('name'), {
+        page: 'library',
+        show: 'albums',
+        depth: console.log(this),
+        artist: item.attr('name')
+      })
     }
   }
 

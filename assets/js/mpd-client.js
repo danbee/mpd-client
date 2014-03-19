@@ -3,5 +3,6 @@
 //= require ./libs/angular-resource
 
 //= require ./mpd-client.app
+//= require_tree ./services/
 //= require_tree ./filters/
 //= require_tree ./controllers/

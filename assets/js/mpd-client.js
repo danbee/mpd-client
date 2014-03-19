@@ -1,10 +1,7 @@
 //= require ./libs/jquery-2.0.3.min
-//= require ./libs/can.jquery.min.js
-//= require ./libs/can.ejs.js
+//= require ./libs/angular
+//= require ./libs/angular-resource
 
-//= require ./routes.js
-//= require_tree ./models/
-//= require_tree ./helpers/
-//= require_tree ./controls/
-//= require_tree ./constructs/
-//= require ./application.js
+//= require ./mpd-client.app
+//= require_tree ./filters/
+//= require_tree ./controllers/

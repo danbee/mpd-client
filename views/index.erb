@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="mpdClient">
   <head>
     <title>MPD Client</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,12 +8,35 @@
   </head>
 
   <body>
-    <div id="app">
-      <div id="content">
-        <div id="library"></div>
-        <div id="queue"></div>
+    <div id="content">
+      <div id="library"></div>
+      <div id="queue" ng-controller="queue">
+        <header>
+          <a class="library" href="#!library">Library</a>
+          <h1>Queue</h1>
+        </header>
+        <ol class="songs">
+          <li ng-repeat="song in queueSongs" ng-class="{ playing: song.playing }">
+            <p class="title">{{ song.title }}</p>
+            <p class="artist">{{ song.artist }}</p>
+          </li>
+        </ol>
       </div>
-      <div id="transport"></div>
+    </div>
+    <div id="transport" ng-controller="transport">
+      <div class="scrubber">
+        <div class="time elapsed">{{ status.time[0] | formatLength }}</div>
+        <div class="time total">{{ status.time[1] | formatLength }}</div>
+        <div class="track">
+        </div>
+      </div>
+      <nav class="controls">
+        <button ng-click="sendCommand('previous')">previous</button>
+        <button ng-click="sendCommand('pause')" ng-if="playing()">pause</button>
+        <button ng-click="sendCommand('play')" ng-if="!playing()">play</button>
+        <button ng-click="sendCommand('stop')">stop</button>
+        <button ng-click="sendCommand('next')">next</button>
+      </nav>
     </div>
   </body>
 </html>

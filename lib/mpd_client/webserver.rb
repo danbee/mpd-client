@@ -92,7 +92,7 @@ module MPDClient
 
       get '/queue' do
         content_type 'application/json'
-        { data: Queue.new }.to_json
+        Queue.new.to_json
       end
 
       put '/control/play' do

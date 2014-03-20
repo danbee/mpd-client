@@ -21,8 +21,16 @@ mpdClient.controller('transport', function ($scope, $http, serverEvents) {
     $http({ method: 'PUT', url: '/api/control/' + command })
   }
 
+  $scope.stopped = function () {
+    return $scope.status.state == 'stop'
+  }
+
   $scope.playing = function () {
     return $scope.status.state == 'play'
+  }
+
+  $scope.markerPosition = function () {
+    return ($scope.elapsedTime / $scope.totalTime) * 100
   }
 
   serverEvents.onUpdateStatus($scope.updateStatus)

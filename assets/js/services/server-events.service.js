@@ -1,8 +1,15 @@
-mpdClient.factory('serverEvents', function () {
+mpdClient.factory('serverEvents', function ($rootScope) {
+
   var events = new EventSource('/api/stream'),
       serverEvents = {
+        onUpdateQueue: function (callback) {
+          this.updateQueueCallback = callback
+        },
         onUpdateStatus: function (callback) {
-          this.onUpdateStatusCallback = callback
+          this.updateStatusCallback = callback
+        },
+        onUpdateTime: function (callback) {
+          this.updateTimeCallback = callback
         }
       }
 
@@ -10,13 +17,13 @@ mpdClient.factory('serverEvents', function () {
     response = JSON.parse(e.data);
     switch (response.type) {
       case 'status':
-        serverEvents.onUpdateStatusCallback(response.data)
+        $rootScope.$apply(function () { serverEvents.updateStatusCallback(response.data) })
       break;
       case 'queue':
-        $scope.$emit('update:queue', response.data)
+        $rootScope.$apply(function () { serverEvents.updateQueueCallback(response.data) })
       break;
       case 'time':
-        $scope.$emit('update:time', response.data);
+        $rootScope.$apply(function () { serverEvents.updateTimeCallback(response.data) })
       break;
     }
   }

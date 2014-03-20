@@ -25,8 +25,8 @@
     </div>
     <div id="transport" ng-controller="transport">
       <div class="scrubber">
-        <div class="time elapsed">{{ status.time[0] | formatLength }}</div>
-        <div class="time total">{{ status.time[1] | formatLength }}</div>
+        <div class="time elapsed">{{ elapsedTime | formatLength }}</div>
+        <div class="time total">{{ totalTime | formatLength }}</div>
         <div class="track">
         </div>
       </div>

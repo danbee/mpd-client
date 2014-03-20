@@ -1,10 +1,10 @@
-mpdClient.controller('queue', function ($rootScope, $scope, $resource, serverEvents) {
+mpdClient.controller('queue', function ($scope, $resource, serverEvents) {
   var Queue = $resource('/api/queue')
 
-  $rootScope.queueSongs = Queue.query()
+  $scope.queueSongs = Queue.query()
 
   $scope.updateQueue = function(data) {
-    $rootScope.queueSongs = data
+    $scope.queueSongs = data
   }
 
   serverEvents.onUpdateQueue($scope.updateQueue)

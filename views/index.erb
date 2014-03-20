@@ -28,6 +28,7 @@
         <div class="time elapsed">{{ elapsedTime | formatLength }}</div>
         <div class="time total">{{ totalTime | formatLength }}</div>
         <div class="track">
+          <div class="marker" style="left: {{ markerPosition }}%"></div>
         </div>
       </div>
       <nav class="controls">

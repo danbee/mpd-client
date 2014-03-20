@@ -1,20 +1,20 @@
-mpdClient.controller('transport', function ($rootScope, $scope, $http, serverEvents) {
+mpdClient.controller('transport', function ($scope, $http, serverEvents) {
   var Status = $http({ method: 'GET', url: '/api/status' })
 
-  $rootScope.status = {}
+  $scope.status = {}
 
   Status.success(function (data, status, headers, config) {
     $scope.updateStatus(data)
   })
 
   $scope.updateStatus = function(data) {
-    $rootScope.status = data
+    $scope.status = data
     if (data.time) { $scope.updateTime(data.time) }
   }
 
   $scope.updateTime = function(data) {
-    $rootScope.elapsedTime = data[0]
-    $rootScope.totalTime = data[1]
+    $scope.elapsedTime = data[0]
+    $scope.totalTime = data[1]
   }
 
   $scope.sendCommand = function (command) {

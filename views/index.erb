@@ -10,34 +10,8 @@
   <body>
     <div id="content">
       <div id="library"></div>
-      <div id="queue" ng-controller="queue">
-        <header>
-          <a class="library" href="#!library">Library</a>
-          <h1>Queue</h1>
-        </header>
-        <ol class="songs">
-          <li ng-repeat="song in queueSongs" ng-class="{ playing: song.playing }">
-            <p class="title">{{ song.title }}</p>
-            <p class="artist">{{ song.artist }}</p>
-          </li>
-        </ol>
-      </div>
+      <ng-include src="'<%= asset_path 'views/queue.html' %>'"></ng-include>
     </div>
-    <div id="transport" ng-controller="transport">
-      <div class="scrubber">
-        <div class="time elapsed">{{ elapsedTime | formatLength }}</div>
-        <div class="time total">{{ totalTime | formatLength }}</div>
-        <div class="track">
-          <div class="marker" style="left: {{ markerPosition() }}%" ng-if="!stopped()"></div>
-        </div>
-      </div>
-      <nav class="controls">
-        <button ng-click="sendCommand('previous')">previous</button>
-        <button ng-click="sendCommand('pause')" ng-if="playing()">pause</button>
-        <button ng-click="sendCommand('play')" ng-if="!playing()">play</button>
-        <button ng-click="sendCommand('stop')">stop</button>
-        <button ng-click="sendCommand('next')">next</button>
-      </nav>
-    </div>
+    <ng-include src="'<%= asset_path 'views/transport.html' %>'"></ng-include>
   </body>
 </html>

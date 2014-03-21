@@ -1,0 +1,12 @@
+<div id="queue" ng-controller="queue">
+  <header>
+    <a class="library" href="#!library">Library</a>
+    <h1>Queue</h1>
+  </header>
+  <ol class="songs">
+    <li ng-repeat="song in queueSongs" ng-class="{ playing: song.playing }">
+      <p class="title">{{ song.title }}</p>
+      <p class="artist">{{ song.artist }}</p>
+    </li>
+  </ol>
+</div>

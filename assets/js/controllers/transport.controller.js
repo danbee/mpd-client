@@ -1,9 +1,7 @@
-mpdClient.controller('transport', function ($scope, $http, serverEvents) {
-  var Status = $http({ method: 'GET', url: '/api/status' })
-
+mpdClient.controller('transport', function ($scope, $http, api, serverEvents) {
   $scope.status = {}
 
-  Status.success(function (data, status, headers, config) {
+  api.getStatus().success(function (data, status, headers, config) {
     $scope.updateStatus(data)
   })
 
@@ -17,9 +15,7 @@ mpdClient.controller('transport', function ($scope, $http, serverEvents) {
     $scope.totalTime = data[1]
   }
 
-  $scope.sendCommand = function (command) {
-    $http({ method: 'PUT', url: '/api/control/' + command })
-  }
+  $scope.sendCommand = api.sendCommand
 
   $scope.stopped = function () {
     return $scope.status.state == 'stop'

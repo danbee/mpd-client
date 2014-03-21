@@ -8,10 +8,12 @@
   </head>
 
   <body>
-    <div id="content">
-      <div id="library"></div>
-      <ng-include src="'<%= asset_path 'views/queue.html' %>'"></ng-include>
-    </div>
-    <ng-include src="'<%= asset_path 'views/transport.html' %>'"></ng-include>
+    <main>
+      <div id="content">
+        <ng-include src="'<%= asset_path 'views/library.html' %>'"></ng-include>
+        <ng-include src="'<%= asset_path 'views/queue.html' %>'"></ng-include>
+      </div>
+      <ng-include src="'<%= asset_path 'views/transport.html' %>'"></ng-include>
+    </main>
   </body>
 </html>

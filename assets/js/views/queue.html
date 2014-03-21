@@ -7,6 +7,7 @@
     <li ng-repeat="song in queueSongs" ng-class="{ playing: song.playing }">
       <p class="title">{{ song.title }}</p>
       <p class="artist">{{ song.artist }}</p>
+      <p class="length">{{ song.length | formatLength }}</p>
     </li>
   </ol>
 </div>

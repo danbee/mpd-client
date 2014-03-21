@@ -1,4 +1,4 @@
-mpdClient.controller('transport', function ($scope, $http, api, serverEvents) {
+mpdClient.controller('transport', function ($scope, api, serverEvents) {
   $scope.status = {}
 
   api.getStatus().success(function (data, status, headers, config) {

@@ -25,8 +25,15 @@ GEM
       dotenv (>= 0.7)
       thor (>= 0.13.6)
     hike (1.2.3)
+    jasmine (2.0.0)
+      jasmine-core (~> 2.0.0)
+      phantomjs
+      rack (>= 1.2.1)
+      rake
+    jasmine-core (2.0.0)
     method_source (0.8.2)
     multi_json (1.8.2)
+    phantomjs (1.9.7.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -91,6 +98,7 @@ PLATFORMS
 DEPENDENCIES
   active_support
   foreman
+  jasmine
   pry
   rspec
   rspec-mocks

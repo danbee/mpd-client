@@ -14,6 +14,7 @@ gem 'active_support', require: false
 
 group :development, :test do
   gem 'pry'
+  gem 'jasmine'
 end
 
 group :test do

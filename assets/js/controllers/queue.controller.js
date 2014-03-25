@@ -5,5 +5,9 @@ mpdClient.controller('queue', function ($scope, api, serverEvents) {
     $scope.queueSongs = data
   }
 
-  serverEvents.onUpdateQueue($scope.updateQueue)
+  $scope.playTrack = function(id) {
+    console.log(id)
+  }
+
+  $scope.$on('update:queue', function (evt, data) { $scope.updateQueue(data) })
 })

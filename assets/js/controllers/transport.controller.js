@@ -29,6 +29,6 @@ mpdClient.controller('transport', function ($scope, api, serverEvents) {
     return ($scope.elapsedTime / $scope.totalTime) * 100
   }
 
-  serverEvents.onUpdateStatus($scope.updateStatus)
-  serverEvents.onUpdateTime($scope.updateTime)
+  $scope.$on('update:status', function (evt, data) { $scope.updateStatus(data) })
+  $scope.$on('update:time', function (evt, data) { $scope.updateTime(data) })
 })

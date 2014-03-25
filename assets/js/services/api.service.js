@@ -7,6 +7,10 @@ mpdClient.factory('api', function ($rootScope, $http, $resource) {
       $http({ method: 'PUT', url: apiUrl + '/control/' + command })
     },
 
+    playTrack: function (pos) {
+      $http({ method: 'PUT', url: apiUrl + '/control/play', params: { pos: pos } })
+    },
+
     getStatus: function () {
       return $http({ method: 'GET', url: apiUrl + '/status' })
     },

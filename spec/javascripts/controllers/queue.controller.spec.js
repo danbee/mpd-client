@@ -16,6 +16,7 @@ describe('queue controller', function() {
   it('sets the currently playing song', function () {
     scope.updatePlaying(scope.queueSongs[1].id)
     expect(scope.queueSongs[0].playing).toBe(false)
+    expect(scope.queueSongs[1].playing).toBe(true)
   })
 
 });

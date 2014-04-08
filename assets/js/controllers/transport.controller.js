@@ -1,10 +1,6 @@
 mpdClient.controller('transport', function ($scope, api, serverEvents) {
   $scope.status = {}
 
-  api.getStatus().success(function (data, status, headers, config) {
-    $scope.updateStatus(data)
-  })
-
   $scope.updateStatus = function(data) {
     $scope.status = data
     if (data.time) { $scope.updateTime(data.time) }
@@ -28,6 +24,10 @@ mpdClient.controller('transport', function ($scope, api, serverEvents) {
   $scope.markerPosition = function () {
     return ($scope.elapsedTime / $scope.totalTime) * 100
   }
+
+  api.getStatus().success(function (data, status, headers, config) {
+    $scope.updateStatus(data)
+  })
 
   $scope.$on('update:status', function (evt, data) { $scope.updateStatus(data) })
   $scope.$on('update:time', function (evt, data) { $scope.updateTime(data) })

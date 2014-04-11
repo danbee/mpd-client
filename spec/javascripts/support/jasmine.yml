@@ -11,15 +11,15 @@
 #   - dist/**/*.js
 #
 src_files:
-  - js/libs/jquery-2.0.3.min.js
-  - js/libs/angular.js
-  - js/libs/angular-resource.js
+  - javascripts/libs/jquery-2.0.3.min.js
+  - javascripts/libs/angular.js
+  - javascripts/libs/angular-resource.js
   - __spec__/lib/angular-mocks.js
   - __spec__/mocks/api.mock.js
-  - js/mpd-client.app.js
-  - js/filters/*.js
-  - js/services/*.js
-  - js/controllers/*.js
+  - javascripts/mpd-client.app.js
+  - javascripts/filters/*.js
+  - javascripts/services/*.js
+  - javascripts/controllers/*.js
 
 # stylesheets
 #
@@ -33,7 +33,7 @@ src_files:
 #   - stylesheets/*.css
 #
 stylesheets:
-  - css/**/*.css
+  - stylesheets/**/*.css
 
 # helpers
 #

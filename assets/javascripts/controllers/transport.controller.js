@@ -21,6 +21,10 @@ mpdClient.controller('transport', function ($scope, api, serverEvents) {
     return $scope.status.state == 'play'
   }
 
+  $scope.playingOrPaused = function () {
+    return $scope.status.state == 'play' || $scope.status.state == 'pause'
+  }
+
   $scope.markerPosition = function () {
     return ($scope.elapsedTime / $scope.totalTime) * 100
   }

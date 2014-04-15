@@ -1,0 +1,5 @@
+<ul class="root">
+  <li ng-repeat="entry in currentPane().entries">
+    <a href="#" ng-click="newPane(entry.path, {})">{{ entry.label }}</a>
+  </li>
+</ul>

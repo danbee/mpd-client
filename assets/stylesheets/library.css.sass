@@ -1,6 +1,7 @@
 #library
   background: white
   position: absolute
+  padding: 2.5rem 0 0
   top: 100%
   bottom: 0
   left: 0
@@ -30,17 +31,13 @@
     top: 0
     header
       top: 0
-  .browser
+  ul.root, ol.artists, ol.albums
+    @extend .list
+  ol.songs
+    @extend .song-list
+  div
     position: absolute
+    width: $interface-width
     height: 100%
-    @include transition(left 0.25s ease-in-out)
-    ul.root, ol.artists, ol.albums
-      @extend .list
-    ol.songs
-      @extend .song-list
-    div
-      position: absolute
-      width: $interface-width
-      height: 100%
-      padding: 2.5em 0 0
-      overflow: auto
+    padding: 2.5em 0 0
+    overflow: auto

@@ -1,9 +1,9 @@
-<div id="queue" ng-controller="queue">
+<div id="queue">
   <header>
-    <a class="library" href="#!library">Library</a>
+    <a class="library" href="#" ng-click="showLibrary()">Library</a>
     <h1>Queue</h1>
   </header>
-  <ol class="songs">
+  <ol class="songs" ng-controller="queue">
     <li ng-repeat="song in queueSongs" ng-click="playTrack(song.pos)" ng-class="{ playing: song.playing }">
       <p class="title">{{ song.title }}</p>
       <p class="artist">{{ song.artist }}</p>

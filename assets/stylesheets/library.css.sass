@@ -33,8 +33,12 @@
       top: 0
   ul.root, ol.artists, ol.albums
     @extend .list
+    li
+      cursor: pointer
   ol.songs
     @extend .song-list
+    li
+      cursor: pointer
   div
     position: absolute
     width: $interface-width

@@ -1,5 +1,10 @@
 #queue
-  padding: 2.5rem 0 5.625em
+  overflow: auto
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
   header
     z-index: 1
     @extend .header
@@ -10,6 +15,7 @@
       @include button
   ol
     @extend .song-list
+    padding: 2.5rem 0 5.625em
     li
       cursor: pointer
     li.playing

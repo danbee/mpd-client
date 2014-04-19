@@ -1,12 +1,12 @@
 #library
   background: white
   position: absolute
-  padding: 2.5rem 0 0
   top: 100%
   bottom: 0
   left: 0
   right: 0
   z-index: 2
+  overflow: auto
   @include transition(top 0.35s ease-in-out)
   header
     top: 100%
@@ -33,10 +33,12 @@
       top: 0
   ul.root, ol.artists, ol.albums
     @extend .list
+    padding: 2.5rem 0 0
     li
       cursor: pointer
   ol.songs
     @extend .song-list
+    padding: 2.5rem 0 0
     li
       cursor: pointer
   div

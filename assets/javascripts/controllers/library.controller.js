@@ -14,6 +14,8 @@ mpdClient.controller('library', function ($scope, api) {
     ]
   }
 
+  $scope.currentPanelTemplate = 'panels/root.html'
+
   $scope.panes = [rootPane]
 
   $scope.currentPaneIndex = 0
@@ -22,7 +24,14 @@ mpdClient.controller('library', function ($scope, api) {
     return $scope.panes[$scope.currentPaneIndex]
   }
 
-  $scope.newPane = function (path, params) {
-    console.log(path)
+  $scope.newPane = function (path, params, queryParams) {
+    $scope.panes.push({
+      title: params.title,
+      entries: api.getItems(path).query(queryParams)
+    })
+
+    $scope.currentPaneIndex += 1
+
+    $scope.currentPanelTemplate = 'panels' + path + '.html'
   }
 })

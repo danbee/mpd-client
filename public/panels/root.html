@@ -1,3 +1,6 @@
 <ul class="root">
-  <li ng-repeat="entry in currentPane().entries" ng-click="newPane(entry.path, {})">{{ entry.label }}</li>
+  <li ng-repeat="entry in currentPane().entries"
+      ng-click="newPane(entry.path, { title: entry.label })">
+    {{ entry.label }}
+  </li>
 </ul>

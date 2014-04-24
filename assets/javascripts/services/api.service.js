@@ -17,6 +17,10 @@ mpdClient.factory('api', function ($rootScope, $http, $resource) {
 
     getQueue: function () {
       return $resource(apiUrl + '/queue')
+    },
+
+    getItems: function (path) {
+      return $resource(apiUrl + path)
     }
   }
 })

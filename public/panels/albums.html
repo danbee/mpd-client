@@ -1,0 +1,6 @@
+<ol class="albums">
+  <li ng-repeat="entry in currentPane().entries"
+      ng-click="newPane('/songs', { title: entry.title }, { artist: entry.artist, album: entry.title })">
+    {{ entry.title }}
+  </li>
+</ol>

@@ -1,0 +1,7 @@
+<ol class="songs">
+  <li ng-repeat="entry in currentPane().entries" ng-click="newPane('/songs', { title: entry.title, artist: entry.artist })">
+    <p class="title">{{ entry.title }}</p>
+    <p class="artist">{{ entry.artist }}</p>
+    <p class="length">{{ entry.length | formatLength }}</p>
+  </li>
+</ol>

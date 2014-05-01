@@ -17,35 +17,36 @@ mpdClient.controller('library', function ($scope, api) {
     ]
   }
 
-  $scope.currentPanelTemplate = 'panels/root.html'
-
   $scope.panes = [rootPane]
-
+  $scope.currentPanelTemplate = 'panels/root.html'
   $scope.currentPaneIndex = 0
 
   $scope.currentPane = function () {
     return $scope.panes[$scope.currentPaneIndex]
   }
 
+  $scope.setPane = function() {
+    $scope.title = $scope.currentPane().title
+    $scope.currentPanelTemplate = 'panels' + $scope.currentPane().path + '.html'
+  }
+
   $scope.newPane = function (path, params, queryParams) {
-    $scope.panes.push({
+    newPane = {
       path: path,
       title: params.title,
       entries: api.getItems(path).query(queryParams)
-    })
+    }
 
+    $scope.panes.push(newPane)
     $scope.currentPaneIndex += 1
-    $scope.title = params.title
-    $scope.currentPanelTemplate = 'panels' + path + '.html'
+
+    $scope.setPane()
   }
 
   $scope.back = function() {
-    lastPane = $scope.panes.pop()
-
-    currentPane = $scope.panes[$scope.panes.length - 1]
-
+    $scope.panes.pop()
     $scope.currentPaneIndex -= 1
-    $scope.title = currentPane.title
-    $scope.currentPanelTemplate = 'panels' + currentPane.path + '.html'
+
+    $scope.setPane()
   }
 })

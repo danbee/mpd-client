@@ -13,6 +13,11 @@
     z-index: 1
     @extend .header
     @include transition(top 0.35s ease-in-out)
+    h1
+      padding: 0 4.25em
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
     a.close
       position: absolute
       right: 10px
@@ -36,6 +41,12 @@
     padding: 2.5rem 0 0
     li
       cursor: pointer
+      @extend .icon-caret-right
+      &:before
+        position: absolute
+        right: 0.5em
+        top: 0.75em
+        @extend .icon
   ol.songs
     @extend .song-list
     padding: 2.5rem 0 0

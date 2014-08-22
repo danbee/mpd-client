@@ -1,7 +1,7 @@
 MPD Client
 ==========
 
-MPD Client built with Sinatra and CanJS. Uses Server-Sent Events for updating
+MPD Client built with Sinatra and AngularJS. Uses Server-Sent Events for updating
 the interface in realtime.
 
 What is MPD?
@@ -14,10 +14,11 @@ Find out more at <http://www.musicpd.org>.
 Instructions
 ------------
 
-1. Install dependencies with `bundle install`.
-2. Run server with `bundle exec thin start`.
-3. Connect to <http://localhost:3000> with your browser.
-4. Profit!
+1. Install and configure MPD. You're on your own with this one.
+2. Install dependencies with `bundle install`.
+3. Run server with `bundle exec thin start`.
+4. Connect to <http://localhost:3000> with your browser.
+5. Profit!
 
 Todo
 ----
